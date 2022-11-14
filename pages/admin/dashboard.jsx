@@ -49,17 +49,12 @@ import {
 } from '@heroicons/react/solid'
 
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'History', href: '#', icon: ClockIcon, current: false },
-  { name: 'Balances', href: '#', icon: ScaleIcon, current: false },
-  { name: 'Cards', href: '#', icon: CreditCardIcon, current: false },
-  { name: 'Recipients', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Reports', href: '#', icon: DocumentReportIcon, current: false }
+  { name: 'Stats', href: '#', icon: HomeIcon, current: true },
+  { name: 'Tracks', href: '#', icon: ClockIcon, current: false }
 ]
 const secondaryNavigation = [
   { name: 'Settings', href: '#', icon: CogIcon },
-  { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
-  { name: 'Privacy', href: '#', icon: ShieldCheckIcon }
+  { name: 'Help', href: '#', icon: QuestionMarkCircleIcon }
 ]
 const cards = [
   { name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45' }
