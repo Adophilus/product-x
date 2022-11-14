@@ -29,14 +29,10 @@ import {
   BellIcon,
   ClockIcon,
   CogIcon,
-  CreditCardIcon,
-  DocumentReportIcon,
   HomeIcon,
   MenuAlt1Icon,
   QuestionMarkCircleIcon,
   ScaleIcon,
-  ShieldCheckIcon,
-  UserGroupIcon,
   XIcon
 } from '@heroicons/react/outline'
 import {
@@ -57,8 +53,8 @@ const secondaryNavigation = [
   { name: 'Help', href: '#', icon: QuestionMarkCircleIcon }
 ]
 const cards = [
-  { name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45' }
-  // More items...
+  { name: 'Users', href: '#', icon: ScaleIcon, amount: 10 },
+  { name: 'Tracks', href: '#', icon: ScaleIcon, amount: 10 }
 ]
 const transactions = [
   {
