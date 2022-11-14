@@ -23,78 +23,96 @@
   }
   ```
 */
-import {MenuAlt1Icon, BellIcon, XIcon,AcademicCapIcon, UserIcon} from '@heroicons/react/outline'
-import { Sidebar, SidebarDesktop } from '@/components/admin/Sidebar'
+import {
+  MenuAlt1Icon,
+  BellIcon,
+  XIcon,
+  AcademicCapIcon,
+  UserIcon,
+} from "@heroicons/react/outline";
+import { Sidebar, SidebarDesktop } from "@/components/admin/Sidebar";
 import {
   CashIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-  SearchIcon
-} from '@heroicons/react/solid'
-import { Fragment, useState } from 'react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
+  SearchIcon,
+} from "@heroicons/react/solid";
+import { Fragment, useState } from "react";
+import { Dialog, Menu, Transition } from "@headlessui/react";
 const cards = [
   { name: "Registered Users", href: "#", icon: UserIcon, amount: 10 },
-  { name: 'Uploaded Courses', href: '#', icon: AcademicCapIcon, amount: 10 }
-]
+  { name: "Uploaded Courses", href: "#", icon: AcademicCapIcon, amount: 10 },
+];
 const transactions = [
   {
     id: 1,
-    name: 'Payment to Molly Sanders',
-    href: '#',
-    amount: '$20,000',
-    currency: 'USD',
-    status: 'success',
-    date: 'July 11, 2020',
-    datetime: '2020-07-11',
-  }
-]
+    name: "Payment to Molly Sanders",
+    href: "#",
+    amount: "$20,000",
+    currency: "USD",
+    status: "success",
+    date: "July 11, 2020",
+    datetime: "2020-07-11",
+  },
+];
 const statusStyles = {
-  success: 'bg-green-100 text-green-800',
-  processing: 'bg-yellow-100 text-yellow-800',
-  failed: 'bg-gray-100 text-gray-800',
-}
+  success: "bg-green-100 text-green-800",
+  processing: "bg-yellow-100 text-yellow-800",
+  failed: "bg-gray-100 text-gray-800",
+};
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-function Card ({ card }) {
-return (
-                    <div key={card.name} className="bg-white overflow-hidden shadow rounded-lg">
-                      <div className="p-5">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0">
-                            <card.icon className="h-6 w-6 text-gray-400" aria-hidden="true" />
-                          </div>
-                          <div className="ml-5 w-0 flex-1">
-                            <dl>
-                              <dt className="text-sm font-medium text-gray-500 truncate">{card.name}</dt>
-                              <dd>
-                                <div className="text-lg font-medium text-gray-900">{card.amount}</div>
-                              </dd>
-                            </dl>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-gray-50 px-5 py-3">
-                        <div className="text-sm">
-                          <a href={card.href} className="font-medium text-cyan-700 hover:text-cyan-900">
-                            View all
-                          </a>
-                        </div>
-                      </div>
-                    </div>)
-}
-
-function Cards () {
-  return <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {cards.map((card) => <Card card={card} key={card.name} />)}
+function Card({ card }) {
+  return (
+    <div key={card.name} className="bg-white overflow-hidden shadow rounded-lg">
+      <div className="p-5">
+        <div className="flex items-center">
+          <div className="flex-shrink-0">
+            <card.icon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+          </div>
+          <div className="ml-5 w-0 flex-1">
+            <dl>
+              <dt className="text-sm font-medium text-gray-500 truncate">
+                {card.name}
+              </dt>
+              <dd>
+                <div className="text-lg font-medium text-gray-900">
+                  {card.amount}
                 </div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-50 px-5 py-3">
+        <div className="text-sm">
+          <a
+            href={card.href}
+            className="font-medium text-cyan-700 hover:text-cyan-900"
+          >
+            View all
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Cards() {
+  return (
+    <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {cards.map((card) => (
+        <Card card={card} key={card.name} />
+      ))}
+    </div>
+  );
 }
 
 export default function Example() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
@@ -108,7 +126,11 @@ export default function Example() {
       */}
       <div className="min-h-full">
         <Transition.Root show={sidebarOpen} as={Fragment}>
-          <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setSidebarOpen}>
+          <Dialog
+            as="div"
+            className="fixed inset-0 flex z-40 lg:hidden"
+            onClose={setSidebarOpen}
+          >
             <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-300"
@@ -146,7 +168,10 @@ export default function Example() {
                       onClick={() => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
-                      <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                      <XIcon
+                        className="h-6 w-6 text-white"
+                        aria-hidden="true"
+                      />
                     </button>
                   </div>
                 </Transition.Child>
@@ -186,7 +211,10 @@ export default function Example() {
                     Search
                   </label>
                   <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none" aria-hidden="true">
+                    <div
+                      className="absolute inset-y-0 left-0 flex items-center pointer-events-none"
+                      aria-hidden="true"
+                    >
                       <SearchIcon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     <input
@@ -218,7 +246,8 @@ export default function Example() {
                         alt=""
                       />
                       <span className="hidden ml-3 text-gray-700 text-sm font-medium lg:block">
-                        <span className="sr-only">Open user menu for </span>Emilia Birch
+                        <span className="sr-only">Open user menu for </span>
+                        Emilia Birch
                       </span>
                       <ChevronDownIcon
                         className="hidden flex-shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block"
@@ -240,7 +269,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Your Profile
                           </a>
@@ -250,7 +282,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Settings
                           </a>
@@ -260,7 +295,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Logout
                           </a>
@@ -275,7 +313,9 @@ export default function Example() {
           <main className="flex-1 pb-8">
             <div className="mt-8">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-lg leading-6 font-medium text-gray-900">Overview</h2>
+                <h2 className="text-lg leading-6 font-medium text-gray-900">
+                  Overview
+                </h2>
                 <Cards />
               </div>
 
@@ -285,23 +325,41 @@ export default function Example() {
 
               {/* Activity list (smallest breakpoint only) */}
               <div className="shadow sm:hidden">
-                <ul role="list" className="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden">
+                <ul
+                  role="list"
+                  className="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden"
+                >
                   {transactions.map((transaction) => (
                     <li key={transaction.id}>
-                      <a href={transaction.href} className="block px-4 py-4 bg-white hover:bg-gray-50">
+                      <a
+                        href={transaction.href}
+                        className="block px-4 py-4 bg-white hover:bg-gray-50"
+                      >
                         <span className="flex items-center space-x-4">
                           <span className="flex-1 flex space-x-2 truncate">
-                            <CashIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
+                            <CashIcon
+                              className="flex-shrink-0 h-5 w-5 text-gray-400"
+                              aria-hidden="true"
+                            />
                             <span className="flex flex-col text-gray-500 text-sm truncate">
-                              <span className="truncate">{transaction.name}</span>
+                              <span className="truncate">
+                                {transaction.name}
+                              </span>
                               <span>
-                                <span className="text-gray-900 font-medium">{transaction.amount}</span>{' '}
+                                <span className="text-gray-900 font-medium">
+                                  {transaction.amount}
+                                </span>{" "}
                                 {transaction.currency}
                               </span>
-                              <time dateTime={transaction.datetime}>{transaction.date}</time>
+                              <time dateTime={transaction.datetime}>
+                                {transaction.date}
+                              </time>
                             </span>
                           </span>
-                          <ChevronRightIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
+                          <ChevronRightIcon
+                            className="flex-shrink-0 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
                         </span>
                       </a>
                     </li>
@@ -356,7 +414,10 @@ export default function Example() {
                             <tr key={transaction.id} className="bg-white">
                               <td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 <div className="flex">
-                                  <a href={transaction.href} className="group inline-flex space-x-2 truncate text-sm">
+                                  <a
+                                    href={transaction.href}
+                                    className="group inline-flex space-x-2 truncate text-sm"
+                                  >
                                     <CashIcon
                                       className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -368,21 +429,25 @@ export default function Example() {
                                 </div>
                               </td>
                               <td className="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                <span className="text-gray-900 font-medium">{transaction.amount} </span>
+                                <span className="text-gray-900 font-medium">
+                                  {transaction.amount}{" "}
+                                </span>
                                 {transaction.currency}
                               </td>
                               <td className="hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block">
                                 <span
                                   className={classNames(
                                     statusStyles[transaction.status],
-                                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize'
+                                    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
                                   )}
                                 >
                                   {transaction.status}
                                 </span>
                               </td>
                               <td className="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                <time dateTime={transaction.datetime}>{transaction.date}</time>
+                                <time dateTime={transaction.datetime}>
+                                  {transaction.date}
+                                </time>
                               </td>
                             </tr>
                           ))}
@@ -395,7 +460,8 @@ export default function Example() {
                       >
                         <div className="hidden sm:block">
                           <p className="text-sm text-gray-700">
-                            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
+                            Showing <span className="font-medium">1</span> to{" "}
+                            <span className="font-medium">10</span> of{" "}
                             <span className="font-medium">20</span> results
                           </p>
                         </div>
@@ -423,5 +489,5 @@ export default function Example() {
         </div>
       </div>
     </>
-  )
+  );
 }
