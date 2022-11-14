@@ -28,41 +28,41 @@ import {
   BellIcon,
   XIcon,
   AcademicCapIcon,
-  UserIcon,
-} from "@heroicons/react/outline";
-import { Sidebar, SidebarDesktop } from "@/components/admin/Sidebar";
+  UserIcon
+} from '@heroicons/react/outline'
+import { Sidebar, SidebarDesktop } from '@/components/admin/Sidebar'
 import {
   CashIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-  SearchIcon,
-} from "@heroicons/react/solid";
-import { Fragment, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+  SearchIcon
+} from '@heroicons/react/solid'
+import { Fragment, useState } from 'react'
+import { Dialog, Menu, Transition } from '@headlessui/react'
 const cards = [
-  { name: "Registered Users", href: "#", icon: UserIcon, amount: 10 },
-  { name: "Uploaded Courses", href: "#", icon: AcademicCapIcon, amount: 10 },
-];
+  { name: 'Registered Users', href: '#', icon: UserIcon, amount: 10 },
+  { name: 'Uploaded Courses', href: '#', icon: AcademicCapIcon, amount: 10 }
+]
 const transactions = [
   {
     id: 1,
-    name: "Payment to Molly Sanders",
-    href: "#",
-    amount: "$20,000",
-    currency: "USD",
-    status: "success",
-    date: "July 11, 2020",
-    datetime: "2020-07-11",
-  },
-];
+    name: 'Payment to Molly Sanders',
+    href: '#',
+    amount: '$20,000',
+    currency: 'USD',
+    status: 'success',
+    date: 'July 11, 2020',
+    datetime: '2020-07-11'
+  }
+]
 const statusStyles = {
-  success: "bg-green-100 text-green-800",
-  processing: "bg-yellow-100 text-yellow-800",
-  failed: "bg-gray-100 text-gray-800",
-};
+  success: 'bg-green-100 text-green-800',
+  processing: 'bg-yellow-100 text-yellow-800',
+  failed: 'bg-gray-100 text-gray-800'
+}
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ')
 }
 
 function Card({ card }) {
@@ -98,7 +98,7 @@ function Card({ card }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function Cards() {
@@ -108,11 +108,11 @@ function Cards() {
         <Card card={card} key={card.name} />
       ))}
     </div>
-  );
+  )
 }
 
 export default function Example() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   return (
     <>
@@ -270,8 +270,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Your Profile
@@ -283,8 +283,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Settings
@@ -296,8 +296,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Logout
@@ -348,7 +348,7 @@ export default function Example() {
                               <span>
                                 <span className="text-gray-900 font-medium">
                                   {transaction.amount}
-                                </span>{" "}
+                                </span>{' '}
                                 {transaction.currency}
                               </span>
                               <time dateTime={transaction.datetime}>
@@ -430,7 +430,7 @@ export default function Example() {
                               </td>
                               <td className="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
                                 <span className="text-gray-900 font-medium">
-                                  {transaction.amount}{" "}
+                                  {transaction.amount}{' '}
                                 </span>
                                 {transaction.currency}
                               </td>
@@ -438,7 +438,7 @@ export default function Example() {
                                 <span
                                   className={classNames(
                                     statusStyles[transaction.status],
-                                    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
+                                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize'
                                   )}
                                 >
                                   {transaction.status}
@@ -460,8 +460,8 @@ export default function Example() {
                       >
                         <div className="hidden sm:block">
                           <p className="text-sm text-gray-700">
-                            Showing <span className="font-medium">1</span> to{" "}
-                            <span className="font-medium">10</span> of{" "}
+                            Showing <span className="font-medium">1</span> to{' '}
+                            <span className="font-medium">10</span> of{' '}
                             <span className="font-medium">20</span> results
                           </p>
                         </div>
@@ -489,5 +489,5 @@ export default function Example() {
         </div>
       </div>
     </>
-  );
+  )
 }
