@@ -23,25 +23,47 @@
   }
   ```
 */
-import {
-  MenuAlt1Icon,
-  BellIcon,
-  XIcon,
-  AcademicCapIcon,
-  UserIcon
-} from '@heroicons/react/outline'
-import { Sidebar, SidebarDesktop } from '@/components/admin/Sidebar'
-import {
-  CashIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-  SearchIcon
-} from '@heroicons/react/solid'
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import {
+  BellIcon,
+  ClockIcon,
+  CogIcon,
+  CreditCardIcon,
+  DocumentReportIcon,
+  HomeIcon,
+  MenuAlt1Icon,
+  QuestionMarkCircleIcon,
+  ScaleIcon,
+  ShieldCheckIcon,
+  UserGroupIcon,
+  XIcon
+} from '@heroicons/react/outline'
+import {
+  CashIcon,
+  CheckCircleIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+  OfficeBuildingIcon,
+  SearchIcon
+} from '@heroicons/react/solid'
+
+const navigation = [
+  { name: 'Home', href: '#', icon: HomeIcon, current: true },
+  { name: 'History', href: '#', icon: ClockIcon, current: false },
+  { name: 'Balances', href: '#', icon: ScaleIcon, current: false },
+  { name: 'Cards', href: '#', icon: CreditCardIcon, current: false },
+  { name: 'Recipients', href: '#', icon: UserGroupIcon, current: false },
+  { name: 'Reports', href: '#', icon: DocumentReportIcon, current: false }
+]
+const secondaryNavigation = [
+  { name: 'Settings', href: '#', icon: CogIcon },
+  { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
+  { name: 'Privacy', href: '#', icon: ShieldCheckIcon }
+]
 const cards = [
-  { name: 'Registered Users', href: '#', icon: UserIcon, amount: 10 },
-  { name: 'Uploaded Courses', href: '#', icon: AcademicCapIcon, amount: 10 }
+  { name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45' }
+  // More items...
 ]
 const transactions = [
   {
@@ -54,6 +76,7 @@ const transactions = [
     date: 'July 11, 2020',
     datetime: '2020-07-11'
   }
+  // More transactions...
 ]
 const statusStyles = {
   success: 'bg-green-100 text-green-800',
@@ -65,54 +88,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function Card({ card }) {
-  return (
-    <div key={card.name} className="bg-white overflow-hidden shadow rounded-lg">
-      <div className="p-5">
-        <div className="flex items-center">
-          <div className="flex-shrink-0">
-            <card.icon className="h-6 w-6 text-gray-400" aria-hidden="true" />
-          </div>
-          <div className="ml-5 w-0 flex-1">
-            <dl>
-              <dt className="text-sm font-medium text-gray-500 truncate">
-                {card.name}
-              </dt>
-              <dd>
-                <div className="text-lg font-medium text-gray-900">
-                  {card.amount}
-                </div>
-              </dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <div className="bg-gray-50 px-5 py-3">
-        <div className="text-sm">
-          <a
-            href={card.href}
-            className="font-medium text-cyan-700 hover:text-cyan-900"
-          >
-            View all
-          </a>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function Cards() {
-  return (
-    <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {cards.map((card) => (
-        <Card card={card} key={card.name} />
-      ))}
-    </div>
-  )
-}
-
 export default function Example() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
     <>
@@ -182,7 +159,49 @@ export default function Example() {
                     alt="Easywire logo"
                   />
                 </div>
-                <Sidebar />
+                <nav
+                  className="mt-5 flex-shrink-0 h-full divide-y divide-cyan-800 overflow-y-auto"
+                  aria-label="Sidebar"
+                >
+                  <div className="px-2 space-y-1">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? 'bg-cyan-800 text-white'
+                            : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                          'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                        )}
+                        aria-current={item.current ? 'page' : undefined}
+                      >
+                        <item.icon
+                          className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                  <div className="mt-6 pt-6">
+                    <div className="px-2 space-y-1">
+                      {secondaryNavigation.map((item) => (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
+                        >
+                          <item.icon
+                            className="mr-4 h-6 w-6 text-cyan-200"
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </nav>
               </div>
             </Transition.Child>
             <div className="flex-shrink-0 w-14" aria-hidden="true">
@@ -191,7 +210,62 @@ export default function Example() {
           </Dialog>
         </Transition.Root>
 
-        <SidebarDesktop />
+        {/* Static sidebar for desktop */}
+        <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
+          {/* Sidebar component, swap this element with another sidebar if you like */}
+          <div className="flex flex-col flex-grow bg-cyan-700 pt-5 pb-4 overflow-y-auto">
+            <div className="flex items-center flex-shrink-0 px-4">
+              <img
+                className="h-8 w-auto"
+                src="https://tailwindui.com/img/logos/easywire-logo-cyan-300-mark-white-text.svg"
+                alt="Easywire logo"
+              />
+            </div>
+            <nav
+              className="mt-5 flex-1 flex flex-col divide-y divide-cyan-800 overflow-y-auto"
+              aria-label="Sidebar"
+            >
+              <div className="px-2 space-y-1">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className={classNames(
+                      item.current
+                        ? 'bg-cyan-800 text-white'
+                        : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                      'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
+                    )}
+                    aria-current={item.current ? 'page' : undefined}
+                  >
+                    <item.icon
+                      className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+              <div className="mt-6 pt-6">
+                <div className="px-2 space-y-1">
+                  {secondaryNavigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
+                    >
+                      <item.icon
+                        className="mr-4 h-6 w-6 text-cyan-200"
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
 
         <div className="lg:pl-64 flex flex-col flex-1">
           <div className="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:border-none">
@@ -311,12 +385,115 @@ export default function Example() {
             </div>
           </div>
           <main className="flex-1 pb-8">
+            {/* Page header */}
+            <div className="bg-white shadow">
+              <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
+                <div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
+                  <div className="flex-1 min-w-0">
+                    {/* Profile */}
+                    <div className="flex items-center">
+                      <img
+                        className="hidden h-16 w-16 rounded-full sm:block"
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
+                        alt=""
+                      />
+                      <div>
+                        <div className="flex items-center">
+                          <img
+                            className="h-16 w-16 rounded-full sm:hidden"
+                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
+                            alt=""
+                          />
+                          <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
+                            Good morning, Emilia Birch
+                          </h1>
+                        </div>
+                        <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
+                          <dt className="sr-only">Company</dt>
+                          <dd className="flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6">
+                            <OfficeBuildingIcon
+                              className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                              aria-hidden="true"
+                            />
+                            Duke street studio
+                          </dd>
+                          <dt className="sr-only">Account status</dt>
+                          <dd className="mt-3 flex items-center text-sm text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize">
+                            <CheckCircleIcon
+                              className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
+                              aria-hidden="true"
+                            />
+                            Verified account
+                          </dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-6 flex space-x-3 md:mt-0 md:ml-4">
+                    <button
+                      type="button"
+                      className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                    >
+                      Add money
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                    >
+                      Send money
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="mt-8">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-lg leading-6 font-medium text-gray-900">
                   Overview
                 </h2>
-                <Cards />
+                <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {/* Card */}
+                  {cards.map((card) => (
+                    <div
+                      key={card.name}
+                      className="bg-white overflow-hidden shadow rounded-lg"
+                    >
+                      <div className="p-5">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0">
+                            <card.icon
+                              className="h-6 w-6 text-gray-400"
+                              aria-hidden="true"
+                            />
+                          </div>
+                          <div className="ml-5 w-0 flex-1">
+                            <dl>
+                              <dt className="text-sm font-medium text-gray-500 truncate">
+                                {card.name}
+                              </dt>
+                              <dd>
+                                <div className="text-lg font-medium text-gray-900">
+                                  {card.amount}
+                                </div>
+                              </dd>
+                            </dl>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-gray-50 px-5 py-3">
+                        <div className="text-sm">
+                          <a
+                            href={card.href}
+                            className="font-medium text-cyan-700 hover:text-cyan-900"
+                          >
+                            View all
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <h2 className="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">
