@@ -71,38 +71,36 @@ export function SidebarMobile({
             >
               <div className="px-2 space-y-1">
                 {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.path}
-                    className={classNames(
-                      item.current
-                        ? 'bg-cyan-800 text-white'
-                        : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
-                      'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                    )}
-                    aria-current={item.current ? 'page' : undefined}
-                  >
-                    <item.icon
-                      className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
-                      aria-hidden="true"
-                    />
-                    {item.name}
+                  <Link key={item.name} href={item.path}>
+                    <a
+                      className={classNames(
+                        item.current
+                          ? 'bg-cyan-800 text-white'
+                          : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                        'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                      )}
+                      aria-current={item.current ? 'page' : undefined}
+                    >
+                      <item.icon
+                        className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </a>
                   </Link>
                 ))}
               </div>
               <div className="mt-6 pt-6">
                 <div className="px-2 space-y-1">
                   {secondaryNavigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.path}
-                      className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
-                    >
-                      <item.icon
-                        className="mr-4 h-6 w-6 text-cyan-200"
-                        aria-hidden="true"
-                      />
-                      {item.name}
+                    <Link key={item.name} href={item.path}>
+                      <a className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600">
+                        <item.icon
+                          className="mr-4 h-6 w-6 text-cyan-200"
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </a>
                     </Link>
                   ))}
                 </div>
@@ -136,38 +134,36 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
         >
           <div className="px-2 space-y-1">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.path}
-                className={classNames(
-                  item.current
-                    ? 'bg-cyan-800 text-white'
-                    : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
-                  'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
-                )}
-                aria-current={item.current ? 'page' : undefined}
-              >
-                <item.icon
-                  className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
-                  aria-hidden="true"
-                />
-                {item.name}
+              <Link key={item.name} href={item.path}>
+                <a
+                  className={classNames(
+                    item.current
+                      ? 'bg-cyan-800 text-white'
+                      : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                    'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
+                  )}
+                  aria-current={item.current ? 'page' : undefined}
+                >
+                  <item.icon
+                    className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
+                    aria-hidden="true"
+                  />
+                  {item.name}
+                </a>
               </Link>
             ))}
           </div>
           <div className="mt-6 pt-6">
             <div className="px-2 space-y-1">
               {secondaryNavigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  className="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
-                >
-                  <item.icon
-                    className="mr-4 h-6 w-6 text-cyan-200"
-                    aria-hidden="true"
-                  />
-                  {item.name}
+                <Link key={item.name} href={item.path}>
+                  <a className="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600">
+                    <item.icon
+                      className="mr-4 h-6 w-6 text-cyan-200"
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </a>
                 </Link>
               ))}
             </div>

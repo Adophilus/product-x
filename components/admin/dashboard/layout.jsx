@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import {
@@ -34,13 +35,11 @@ const navigation = [
   }
 ]
 const secondaryNavigation = [
-  { name: 'Settings', href: '#', icon: CogIcon },
-  { name: 'Help', href: '#', icon: QuestionMarkCircleIcon }
+  { name: 'Settings', path: '#', icon: CogIcon },
+  { name: 'Help', path: '#', icon: QuestionMarkCircleIcon }
 ]
 
-const pages = [{ name: 'Dashboard', href: '#', current: false }]
-
-export default function Layout({ children, title, user }) {
+export default function Layout({ children, title, user, breadcrumbs }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
@@ -89,20 +88,23 @@ export default function Layout({ children, title, user }) {
                           </a>
                         </div>
                       </li>
-                      {pages.map((page) => (
-                        <li key={page.name}>
+                      {breadcrumbs.map((breadcrumb) => (
+                        <li key={breadcrumb.name}>
                           <div className="flex items-center">
                             <ChevronRightIcon
                               className="flex-shrink-0 h-5 w-5 text-gray-400"
                               aria-hidden="true"
                             />
-                            <a
-                              href={page.href}
-                              className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-                              aria-current={page.current ? 'page' : undefined}
-                            >
-                              {page.name}
-                            </a>
+                            <Link href={breadcrumb.path}>
+                              <a
+                                className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                                aria-current={
+                                  breadcrumb.current ? 'page' : undefined
+                                }
+                              >
+                                {breadcrumb.name}
+                              </a>
+                            </Link>
                           </div>
                         </li>
                       ))}
@@ -147,19 +149,6 @@ export default function Layout({ children, title, user }) {
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              Your Profile
-                            </a>
-                          )}
-                        </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
                             <a

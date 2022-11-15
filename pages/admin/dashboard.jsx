@@ -26,6 +26,10 @@ const cards = [
   { name: 'Tracks', href: '#', icon: MapIcon, amount: 10 }
 ]
 
+const breadcrumbs = [
+  { name: 'Dashboard', path: '/admin/dashboard', current: false }
+]
+
 function Card({ card }) {
   return (
     <div className="bg-white overflow-hidden shadow rounded-lg">
@@ -80,7 +84,7 @@ export default function DashboardView() {
   })
 
   return (
-    <Layout title={'Dashboard'} user={user.current}>
+    <Layout title={'Dashboard'} user={user.current} breadcrumbs={breadcrumbs}>
       <div className="mt-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-lg leading-6 font-medium text-gray-900">
