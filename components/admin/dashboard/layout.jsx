@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import {
   BellIcon,
-  ClockIcon,
+  BookOpenIcon,
   CogIcon,
   ChartBarIcon,
   MenuAlt1Icon,
@@ -30,7 +30,7 @@ const navigation = [
   {
     name: 'Tracks',
     path: '/admin/dashboard/tracks',
-    icon: ClockIcon,
+    icon: BookOpenIcon,
     current: false
   }
 ]
