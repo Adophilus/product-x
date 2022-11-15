@@ -1,4 +1,5 @@
-export default function PageHeaderComponent({ title, children }) {
+export default function PageHeaderComponent({ title, children, icon }) {
+  const Icon = icon
   return (
     <div className="bg-white shadow">
       <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
@@ -7,7 +8,8 @@ export default function PageHeaderComponent({ title, children }) {
             <div className="flex justify-between">
               <div>
                 <div className="flex items-center">
-                  <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
+                  <h1 className="flex gap-x-2 items-center ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
+                    {icon != null ? <Icon className="-mr-1 h-7 w-7" /> : null}
                     {title}
                   </h1>
                 </div>

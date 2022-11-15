@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import Layout from '@/components/admin/dashboard/layout'
-import { UserIcon, MapIcon } from '@heroicons/react/outline'
+import { UserIcon, MapIcon, ChartBarIcon } from '@heroicons/react/outline'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { classNames } from '@/utils/helpers'
 import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeader'
@@ -86,6 +86,7 @@ export default function DashboardView() {
 
   return (
     <Layout
+      icon={ChartBarIcon}
       pageHeader={<PageHeaderComponent title={'Dashboard'} />}
       user={user.current}
       breadcrumbs={breadcrumbs}

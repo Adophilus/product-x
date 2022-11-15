@@ -14,8 +14,8 @@ const tableHeaders = [
   { name: 'Track' },
   {
     name: (
-      <span className="flex align-center gap-x-1">
-        <UserIcon className="ml-3 -mr-1 h-5 w-5" />
+      <span className="flex items-center gap-x-1">
+        <UserIcon className="-mr-1 h-5 w-5" />
         Users
       </span>
     )
@@ -50,7 +50,8 @@ export default function TracksView() {
   })
   return (
     <Layout
-      user={user}
+      user={user.current}
+      icon={BookOpenIcon}
       pageHeader={
         <PageHeaderComponent icon={BookOpenIcon} title={'Tracks'}>
           <Button>
