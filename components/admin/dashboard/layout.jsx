@@ -23,7 +23,7 @@
   }
   ```
 */
-import { Fragment, useState, useRef } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   BellIcon,
@@ -58,14 +58,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Layout({ children, title }) {
+export default function Layout({ children, title, user }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const user = useRef({
-    firstName: 'John',
-    lastName: 'Doe',
-    profileImg:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  })
 
   return (
     <>
@@ -307,12 +301,12 @@ export default function Layout({ children, title }) {
                     <Menu.Button className="max-w-xs bg-white rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 lg:p-2 lg:rounded-md lg:hover:bg-gray-50">
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={user.current.profileImg}
+                        src={user.profileImg}
                         alt=""
                       />
                       <span className="hidden ml-3 text-gray-700 text-sm font-medium lg:block">
                         <span className="sr-only">Open user menu for </span>
-                        {user.current.firstName} {user.current.lastName}
+                        {user.firstName} {user.lastName}
                       </span>
                       <ChevronDownIcon
                         className="hidden flex-shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block"

@@ -1,6 +1,7 @@
+import { useRef } from 'react'
 import Layout from '@/components/admin/dashboard/layout'
 import { UserIcon, MapIcon } from '@heroicons/react/outline'
-import { CashIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 const recentActivities = [
   {
@@ -74,8 +75,15 @@ function Cards({ cards }) {
   )
 }
 export default function DashboardView() {
+  const user = useRef({
+    firstName: 'John',
+    lastName: 'Doe',
+    profileImg:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+  })
+
   return (
-    <Layout title={'Dashboard'}>
+    <Layout title={'Dashboard'} user={user.current}>
       <div className="mt-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-lg leading-6 font-medium text-gray-900">
