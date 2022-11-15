@@ -3,6 +3,7 @@ import Layout from '@/components/admin/dashboard/layout'
 import { UserIcon, MapIcon } from '@heroicons/react/outline'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { classNames } from '@/utils/helpers'
+import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeader'
 
 const recentActivities = [
   {
@@ -84,7 +85,11 @@ export default function DashboardView() {
   })
 
   return (
-    <Layout title={'Dashboard'} user={user.current} breadcrumbs={breadcrumbs}>
+    <Layout
+      title={<PageHeaderComponent title={'Dashboard'} />}
+      user={user.current}
+      breadcrumbs={breadcrumbs}
+    >
       <div className="mt-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-lg leading-6 font-medium text-gray-900">
