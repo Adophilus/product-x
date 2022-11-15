@@ -18,7 +18,7 @@ export default function TracksView() {
   return (
     <Layout
       user={user}
-      title={
+      pageHeader={
         <PageHeaderComponent title={'Tracks'}>
           <Button>
             Add Track

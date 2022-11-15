@@ -39,7 +39,7 @@ const secondaryNavigation = [
   { name: 'Help', path: '#', icon: QuestionMarkCircleIcon }
 ]
 
-export default function Layout({ children, title, user, breadcrumbs }) {
+export default function Layout({ children, pageHeader, user, breadcrumbs }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
@@ -183,19 +183,7 @@ export default function Layout({ children, title, user, breadcrumbs }) {
             </div>
             <main className="flex-1 pb-8">
               {/* Page header */}
-              <div className="bg-white shadow">
-                <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
-                  <div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center">
-                        <div>
-                          <div className="flex items-center">{title}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {pageHeader}
 
               {children}
             </main>

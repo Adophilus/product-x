@@ -86,7 +86,7 @@ export default function DashboardView() {
 
   return (
     <Layout
-      title={<PageHeaderComponent title={'Dashboard'} />}
+      pageHeader={<PageHeaderComponent title={'Dashboard'} />}
       user={user.current}
       breadcrumbs={breadcrumbs}
     >
