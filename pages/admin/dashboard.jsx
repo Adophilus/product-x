@@ -40,7 +40,7 @@ import {
   CashIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-  SearchIcon
+  HomeIcon
 } from '@heroicons/react/solid'
 
 const navigation = [
@@ -55,6 +55,8 @@ const cards = [
   { name: 'Users', href: '#', icon: UserIcon, amount: 10 },
   { name: 'Tracks', href: '#', icon: MapIcon, amount: 10 }
 ]
+
+const pages = [{ name: 'Dashboard', href: '#', current: false }]
 const transactions = [
   {
     id: 1,
@@ -66,7 +68,6 @@ const transactions = [
     date: 'July 11, 2020',
     datetime: '2020-07-11'
   }
-  // More transactions...
 ]
 const statusStyles = {
   success: 'bg-green-100 text-green-800',
@@ -76,6 +77,52 @@ const statusStyles = {
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
+}
+
+function Card({ card }) {
+  return (
+    <div className="bg-white overflow-hidden shadow rounded-lg">
+      <div className="p-5">
+        <div className="flex items-center">
+          <div className="flex-shrink-0">
+            <card.icon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+          </div>
+          <div className="ml-5 w-0 flex-1">
+            <dl>
+              <dt className="text-sm font-medium text-gray-500 truncate">
+                {card.name}
+              </dt>
+              <dd>
+                <div className="text-lg font-medium text-gray-900">
+                  {card.amount}
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-50 px-5 py-3">
+        <div className="text-sm">
+          <a
+            href={card.href}
+            className="font-medium text-cyan-700 hover:text-cyan-900"
+          >
+            View all
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Cards({ cards }) {
+  return (
+    <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {cards.map((card) => (
+        <Card card={card} key={card.name} />
+      ))}
+    </div>
+  )
 }
 
 export default function Example() {
@@ -276,26 +323,41 @@ export default function Example() {
             {/* Search bar */}
             <div className="flex-1 px-4 flex justify-between sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
               <div className="flex-1 flex">
-                <form className="w-full flex md:ml-0" action="#" method="GET">
-                  <label htmlFor="search-field" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div
-                      className="absolute inset-y-0 left-0 flex items-center pointer-events-none"
-                      aria-hidden="true"
-                    >
-                      <SearchIcon className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <input
-                      id="search-field"
-                      name="search-field"
-                      className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
-                      placeholder="Search transactions"
-                      type="search"
-                    />
-                  </div>
-                </form>
+                <nav className="flex" aria-label="Breadcrumb">
+                  <ol role="list" className="flex items-center space-x-4">
+                    <li>
+                      <div>
+                        <a
+                          href="#"
+                          className="text-gray-400 hover:text-gray-500"
+                        >
+                          <HomeIcon
+                            className="flex-shrink-0 h-5 w-5"
+                            aria-hidden="true"
+                          />
+                          <span className="sr-only">Home</span>
+                        </a>
+                      </div>
+                    </li>
+                    {pages.map((page) => (
+                      <li key={page.name}>
+                        <div className="flex items-center">
+                          <ChevronRightIcon
+                            className="flex-shrink-0 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                          <a
+                            href={page.href}
+                            className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                            aria-current={page.current ? 'page' : undefined}
+                          >
+                            {page.name}
+                          </a>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
               </div>
               <div className="ml-4 flex items-center md:ml-6">
                 <button
@@ -405,48 +467,7 @@ export default function Example() {
                 <h2 className="text-lg leading-6 font-medium text-gray-900">
                   Overview
                 </h2>
-                <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {/* Card */}
-                  {cards.map((card) => (
-                    <div
-                      key={card.name}
-                      className="bg-white overflow-hidden shadow rounded-lg"
-                    >
-                      <div className="p-5">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0">
-                            <card.icon
-                              className="h-6 w-6 text-gray-400"
-                              aria-hidden="true"
-                            />
-                          </div>
-                          <div className="ml-5 w-0 flex-1">
-                            <dl>
-                              <dt className="text-sm font-medium text-gray-500 truncate">
-                                {card.name}
-                              </dt>
-                              <dd>
-                                <div className="text-lg font-medium text-gray-900">
-                                  {card.amount}
-                                </div>
-                              </dd>
-                            </dl>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-gray-50 px-5 py-3">
-                        <div className="text-sm">
-                          <a
-                            href={card.href}
-                            className="font-medium text-cyan-700 hover:text-cyan-900"
-                          >
-                            View all
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <Cards cards={cards} />
               </div>
 
               <h2 className="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">
