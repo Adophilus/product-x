@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { classNames } from '@/utils/helpers'
+import { useRouter } from 'next/router'
 
 export function SidebarMobile({
   sidebarOpen,
@@ -117,6 +118,9 @@ export function SidebarMobile({
 }
 
 export function SidebarDesktop({ navigation, secondaryNavigation }) {
+  const router = useRouter()
+  const isCurrentRoute = (route) => router.route === route
+
   return (
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
       {/* Sidebar component, swap this element with another sidebar if you like */}
@@ -133,39 +137,52 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
           aria-label="Sidebar"
         >
           <div className="px-2 space-y-1">
-            {navigation.map((item) => (
-              <Link key={item.name} href={item.path}>
-                <a
-                  className={classNames(
-                    item.current
-                      ? 'bg-cyan-800 text-white'
-                      : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
-                    'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  <item.icon
-                    className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-6 pt-6">
-            <div className="px-2 space-y-1">
-              {secondaryNavigation.map((item) => (
+            {navigation.map((item) => {
+              const _isCurrentRoute = isCurrentRoute(item.path)
+              return (
                 <Link key={item.name} href={item.path}>
-                  <a className="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600">
+                  <a
+                    className={classNames(
+                      _isCurrentRoute
+                        ? 'bg-cyan-800 text-white'
+                        : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                      'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
+                    )}
+                    aria-current={isCurrentRoute ? 'page' : null}
+                  >
                     <item.icon
-                      className="mr-4 h-6 w-6 text-cyan-200"
+                      className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
                       aria-hidden="true"
                     />
                     {item.name}
                   </a>
                 </Link>
-              ))}
+              )
+            })}
+          </div>
+          <div className="mt-6 pt-6">
+            <div className="px-2 space-y-1">
+              {secondaryNavigation.map((item) => {
+                const _isCurrentRoute = isCurrentRoute(item.path)
+                return (
+                  <Link key={item.name} href={item.path}>
+                    <a
+                      className={classNames(
+                        _isCurrentRoute
+                          ? 'bg-cyan-800 text-white'
+                          : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                        'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
+                      )}
+                    >
+                      <item.icon
+                        className="mr-4 h-6 w-6 text-cyan-200"
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </a>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </nav>
