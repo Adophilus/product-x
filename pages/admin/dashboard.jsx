@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import Layout from '@/components/admin/dashboard/layout'
 import { UserIcon, MapIcon } from '@heroicons/react/outline'
 import { ChevronRightIcon } from '@heroicons/react/solid'
+import { classNames } from '@/utils/helpers'
 
 const recentActivities = [
   {
@@ -24,10 +25,6 @@ const cards = [
   { name: 'Users', href: '#', icon: UserIcon, amount: 10 },
   { name: 'Tracks', href: '#', icon: MapIcon, amount: 10 }
 ]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 function Card({ card }) {
   return (
