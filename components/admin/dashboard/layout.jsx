@@ -17,7 +17,7 @@ import {
 import {
   SidebarMobile,
   SidebarDesktop
-} from '@/components/admin/dashboard/navigation/Sidebar'
+} from '@/components/admin/dashboard/navigation/sidebar'
 import { classNames } from '@/utils/helpers'
 
 const navigation = [
@@ -189,11 +189,7 @@ export default function Layout({ children, title, user, breadcrumbs }) {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center">
                         <div>
-                          <div className="flex items-center">
-                            <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-                              {title}
-                            </h1>
-                          </div>
+                          <div className="flex items-center">{title}</div>
                         </div>
                       </div>
                     </div>
