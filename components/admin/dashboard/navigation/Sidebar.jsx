@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -70,9 +71,9 @@ export function SidebarMobile({
             >
               <div className="px-2 space-y-1">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    href={item.path}
                     className={classNames(
                       item.current
                         ? 'bg-cyan-800 text-white'
@@ -86,15 +87,15 @@ export function SidebarMobile({
                       aria-hidden="true"
                     />
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
               <div className="mt-6 pt-6">
                 <div className="px-2 space-y-1">
                   {secondaryNavigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      href={item.path}
                       className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
                     >
                       <item.icon
@@ -102,7 +103,7 @@ export function SidebarMobile({
                         aria-hidden="true"
                       />
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -135,9 +136,9 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
         >
           <div className="px-2 space-y-1">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                href={item.path}
                 className={classNames(
                   item.current
                     ? 'bg-cyan-800 text-white'
@@ -151,15 +152,15 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
                   aria-hidden="true"
                 />
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="mt-6 pt-6">
             <div className="px-2 space-y-1">
               {secondaryNavigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  href={item.path}
                   className="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
                 >
                   <item.icon
@@ -167,7 +168,7 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
                     aria-hidden="true"
                   />
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

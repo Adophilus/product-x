@@ -20,8 +20,18 @@ import {
 import { classNames } from '@/utils/helpers'
 
 const navigation = [
-  { name: 'Dashboard', href: '', icon: ChartBarIcon, current: true },
-  { name: 'Tracks', href: '#', icon: ClockIcon, current: false }
+  {
+    name: 'Dashboard',
+    path: '/admin/dashboard',
+    icon: ChartBarIcon,
+    current: true
+  },
+  {
+    name: 'Tracks',
+    path: '/admin/dashboard/tracks',
+    icon: ClockIcon,
+    current: false
+  }
 ]
 const secondaryNavigation = [
   { name: 'Settings', href: '#', icon: CogIcon },
