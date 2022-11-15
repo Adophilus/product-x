@@ -17,6 +17,7 @@ import {
   SidebarMobile,
   SidebarDesktop
 } from '@/components/admin/dashboard/navigation/Sidebar'
+import { classNames } from '@/utils/helpers'
 
 const navigation = [
   { name: 'Dashboard', href: '', icon: ChartBarIcon, current: true },
@@ -28,10 +29,6 @@ const secondaryNavigation = [
 ]
 
 const pages = [{ name: 'Dashboard', href: '#', current: false }]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export default function Layout({ children, title, user }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)

@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
+import { classNames } from '@/utils/helpers'
 
 export function SidebarMobile({
   sidebarOpen,
