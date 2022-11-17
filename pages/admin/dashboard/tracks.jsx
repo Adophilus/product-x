@@ -25,12 +25,43 @@ const tableHeaders = [
 ]
 
 function AddTrackForm() {
+  const trackName = useRef()
+  const trackLink = useRef()
+  const trackDescription = useRef()
+
+  const onSubmit = async () => {
+    try {
+      await fetch('/api/tracks', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: trackName.current.value,
+          link: trackLink.current.value,
+          description: trackDescription.current.value
+        })
+      })
+      trackName.current.value = ''
+      trackLink.current.value = ''
+      trackDescription.current.value = ''
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col mt-2">
           <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg bg-white p-5">
-            <form className="space-y-8 divide-y divide-gray-200">
+            <form
+              className="space-y-8 divide-y divide-gray-200"
+              onSubmit={(e) => {
+                e.preventDefault()
+                onSubmit()
+              }}
+            >
               <div className="space-y-8 divide-y divide-gray-200">
                 <div>
                   <div>
@@ -52,6 +83,7 @@ function AddTrackForm() {
                       </label>
                       <div className="mt-1">
                         <input
+                          ref={trackName}
                           type="text"
                           name="track-name"
                           id="track-name"
@@ -71,6 +103,7 @@ function AddTrackForm() {
                       </label>
                       <div className="mt-1">
                         <input
+                          ref={trackLink}
                           type="text"
                           name="track-link"
                           id="track-link"
@@ -87,6 +120,7 @@ function AddTrackForm() {
                       </label>
                       <div className="mt-1">
                         <textarea
+                          ref={trackDescription}
                           id="about"
                           name="about"
                           rows={3}
@@ -137,7 +171,6 @@ export default function TracksView() {
       ? []
       : data.map((track) => [
           <div key={track.id} className="flex">
-            /*
             <a
               href={`/admin/dashboard/tracks/${track.slug}`}
               className="group inline-flex space-x-2 truncate text-sm"
@@ -146,7 +179,6 @@ export default function TracksView() {
                 {track.name}
               </p>
             </a>
-            */j
           </div>,
           <span className="flex text-gray-500">{track.registrations}</span>,
           <time className="text-gray-500" dateTime={formatEpoch(1668502165546)}>
