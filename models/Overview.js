@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 
 export default connection.models.Stat ??
   connection.model(
-    'Stat',
+    'Overview',
     mongoose.Schema({
       name: {
         type: String,
