@@ -22,11 +22,11 @@ export default function TableComponent({ headers, records }) {
                       className={classNames(
                         header.alignment === 'left'
                           ? 'text-left'
-                          : header.alignment === 'center'
-                          ? 'text-center'
                           : header.alignment === 'right'
                           ? 'text-right'
-                          : 'text-right',
+                          : header.alignment === 'center'
+                          ? 'text-center'
+                          : 'text-left',
                         'px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider'
                       )}
                     >
@@ -35,9 +35,9 @@ export default function TableComponent({ headers, records }) {
                   ))}
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {records.length > 0 ? (
-                  records.map((record, index) => (
+              {records.length > 0 && (
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {records.map((record, index) => (
                     <tr key={index} className="bg-white">
                       {record.map((field, index) => (
                         <td
@@ -48,14 +48,15 @@ export default function TableComponent({ headers, records }) {
                         </td>
                       ))}
                     </tr>
-                  ))
-                ) : (
-                  <tr className="w-full px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    No records found!
-                  </tr>
-                )}
-              </tbody>
+                  ))}
+                </tbody>
+              )}
             </table>
+            {records.length === 0 && (
+              <p className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                No records found!
+              </p>
+            )}
             {/* Pagination */}
             <nav
               className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
@@ -68,19 +69,29 @@ export default function TableComponent({ headers, records }) {
                   <span className="font-medium">{records.length}</span> results
                 </p>
               </div>
-              <div className="flex-1 flex justify-between sm:justify-end">
-                <a
-                  href="#"
-                  className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+              <div className="flex-1 flex justify-between gap-x-3 sm:justify-end">
+                <button
+                  disabled={records.length === 0}
+                  className={classNames(
+                    records.length === 0
+                      ? 'text-gray-400 bg-gray-50'
+                      : 'text-gray-700 bg-white hover:bg-gray-50',
+                    'relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md'
+                  )}
                 >
                   Previous
-                </a>
-                <a
-                  href="#"
-                  className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                </button>
+                <button
+                  disabled={records.length === 0}
+                  className={classNames(
+                    records.length === 0
+                      ? 'text-gray-400 bg-gray-50'
+                      : 'text-gray-700 bg-white hover:bg-gray-50',
+                    'relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md'
+                  )}
                 >
                   Next
-                </a>
+                </button>
               </div>
             </nav>
           </div>
