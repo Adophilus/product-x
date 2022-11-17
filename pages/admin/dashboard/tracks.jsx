@@ -56,6 +56,7 @@ function AddTrackForm() {
                           name="track-name"
                           id="track-name"
                           className="shadow-sm focus:ring-cyan-500 focus:border-cyan-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                          required
                         />
                       </div>
                     </div>
@@ -64,6 +65,7 @@ function AddTrackForm() {
                       <label
                         htmlFor="track-link"
                         className="block text-sm font-medium text-gray-700"
+                        required
                       >
                         Track link
                       </label>
@@ -89,6 +91,7 @@ function AddTrackForm() {
                           name="about"
                           rows={3}
                           className="shadow-sm focus:ring-cyan-500 focus:border-cyan-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          required
                         />
                       </div>
                       <p className="mt-2 text-sm text-gray-500">

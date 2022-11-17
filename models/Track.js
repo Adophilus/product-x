@@ -17,10 +17,14 @@ export default connection.models.Track ??
         type: String,
         required: true
       },
+      description: {
+        type: String,
+        required: true
+      },
       registrations: {
         type: Number,
         required: true,
-      default: 0
-    }
+        default: 0
+      }
     })
   )
