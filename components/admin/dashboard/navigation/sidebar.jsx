@@ -60,11 +60,7 @@ export function SidebarMobile({
               </div>
             </Transition.Child>
             <div className="flex-shrink-0 flex items-center px-4">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/easywire-logo-cyan-300-mark-white-text.svg"
-                alt="Easywire logo"
-              />
+              PRODUCT-X
             </div>
             <nav
               className="mt-5 flex-shrink-0 h-full divide-y divide-cyan-800 overflow-y-auto"
@@ -125,13 +121,7 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
       {/* Sidebar component, swap this element with another sidebar if you like */}
       <div className="flex flex-col flex-grow bg-cyan-700 pt-5 pb-4 overflow-y-auto">
-        <div className="flex items-center flex-shrink-0 px-4">
-          <img
-            className="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/easywire-logo-cyan-300-mark-white-text.svg"
-            alt="Easywire logo"
-          />
-        </div>
+        <div className="flex items-center flex-shrink-0 px-4">PRODUCT-X</div>
         <nav
           className="mt-5 flex-1 flex flex-col divide-y divide-cyan-800 overflow-y-auto"
           aria-label="Sidebar"
