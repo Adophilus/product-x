@@ -1,3 +1,4 @@
+import Overview from '@/models/Overview'
 import Track from '@/models/Track'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 
@@ -10,6 +11,9 @@ export default async function handler(req, res) {
       const trackName = req.body.name
       try {
         const track = await Track.create({ name: trackName })
+        const oldOverview = await Overview.findOne({ name: 'registeredTracks' })
+        oldOverview.value += 1
+        await oldOverview.save()
         return res.status(StatusCodes.CREATED).send(track)
       } catch (err) {
         console.log(err)
