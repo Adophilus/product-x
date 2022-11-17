@@ -1,5 +1,6 @@
 import Layout from '@/components/admin/dashboard/layout'
 import { useRef } from 'react'
+import useSWR from 'swr'
 import { PlusIcon, UserIcon, BookOpenIcon } from '@heroicons/react/outline'
 import Button from '@/components/admin/dashboard/elements/button'
 import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeader'
@@ -22,6 +23,7 @@ const tableHeaders = [
   },
   { name: 'Date Added' }
 ]
+/*
 const tracks = [
   [
     <div className="flex">
@@ -40,8 +42,29 @@ const tracks = [
     </time>
   ]
 ]
-
+*/
 export default function TracksView() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+  const { data, error } = useSWR('/api/tracks', fetcher)
+  const tracks =
+    error == null
+      ? []
+      : data.map((track) => [
+          <div key={track.id} className="flex">
+            <a
+              href={`/admin/dashboard/tracks/${track.slug}`}
+              className="group inline-flex space-x-2 truncate text-sm"
+            >
+              <p className="text-gray-500 truncate group-hover:text-gray-900">
+                {track.name}
+              </p>
+            </a>
+          </div>,
+          <span className="flex text-gray-500">{track.registrations}</span>,
+          <time className="text-gray-500" dateTime={formatEpoch(1668502165546)}>
+            {formatEpoch(1668502165546)}
+          </time>
+        ])
   const user = useRef({
     firstName: 'John',
     lastName: 'Doe',
