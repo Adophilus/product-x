@@ -19,7 +19,16 @@ export default function TableComponent({ headers, records }) {
                   {headers.map((header) => (
                     <th
                       key={header.name}
-                      className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className={classNames(
+                        header.alignment === 'left'
+                          ? 'text-left'
+                          : header.alignment === 'center'
+                          ? 'text-center'
+                          : header.alignment === 'right'
+                          ? 'text-right'
+                          : 'text-right',
+                        'px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider'
+                      )}
                     >
                       {header.name}
                     </th>
@@ -27,18 +36,24 @@ export default function TableComponent({ headers, records }) {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {records.map((record, index) => (
-                  <tr key={index} className="bg-white">
-                    {record.map((field, index) => (
-                      <td
-                        key={index}
-                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                      >
-                        {field}
-                      </td>
-                    ))}
+                {records.length > 0 ? (
+                  records.map((record, index) => (
+                    <tr key={index} className="bg-white">
+                      {record.map((field, index) => (
+                        <td
+                          key={index}
+                          className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                        >
+                          {field}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                ) : (
+                  <tr className="w-full px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    No records found!
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
             {/* Pagination */}
