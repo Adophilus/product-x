@@ -29,17 +29,16 @@ function AddTrackForm() {
     <>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col mt-2">
-          <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
+          <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg bg-white p-5">
             <form className="space-y-8 divide-y divide-gray-200">
               <div className="space-y-8 divide-y divide-gray-200">
                 <div>
                   <div>
                     <h3 className="text-lg leading-6 font-medium text-gray-900">
-                      Profile
+                      Add Track
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">
-                      This information will be displayed publicly so be careful
-                      what you share.
+                      This information will be used to create a new track
                     </p>
                   </div>
 
@@ -73,7 +72,6 @@ function AddTrackForm() {
                           type="text"
                           name="track-link"
                           id="track-link"
-                          autoComplete="family-name"
                           className="shadow-sm focus:ring-cyan-500 focus:border-cyan-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
