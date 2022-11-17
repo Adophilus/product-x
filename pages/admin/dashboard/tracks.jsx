@@ -51,6 +51,7 @@ export default function TracksView() {
       ? []
       : data.map((track) => [
           <div key={track.id} className="flex">
+            /*
             <a
               href={`/admin/dashboard/tracks/${track.slug}`}
               className="group inline-flex space-x-2 truncate text-sm"
@@ -59,6 +60,7 @@ export default function TracksView() {
                 {track.name}
               </p>
             </a>
+            */j
           </div>,
           <span className="flex text-gray-500">{track.registrations}</span>,
           <time className="text-gray-500" dateTime={formatEpoch(1668502165546)}>

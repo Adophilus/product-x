@@ -5,7 +5,6 @@ export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
       const tracks = await Track.find()
-      console.log(tracks)
       return res.status(StatusCodes.OK).send(tracks)
     case 'PUT':
       const trackName = req.body.name
