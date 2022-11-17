@@ -15,8 +15,7 @@ export default connection.models.Track ??
       },
       date: {
         type: String,
-        required: true,
-        default: Date.now
+        required: true
       }
     })
   )

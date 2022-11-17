@@ -6,6 +6,7 @@ import { classNames } from '@/utils/helpers'
 import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeader'
 import useSWR from 'swr'
 import TableComponent from '@/components/admin/dashboard/elements/table'
+import { formatEpoch } from '@/utils/helpers'
 
 const tableHeaders = [
   { name: 'Operation' },
@@ -120,14 +121,14 @@ function Cards() {
                   name: 'Users',
                   href: '/admin/dashboard/users',
                   icon: UserIcon,
-                  amount: stat.value
+                  amount: parseInt(stat.value)
                 }
               case 'registeredTracks':
                 return {
                   name: 'Tracks',
                   href: '/admin/dashboard/tracks',
                   icon: MapIcon,
-                  amount: stat.value
+                  amount: parseInt(stat.value)
                 }
               default:
                 return null

@@ -28,7 +28,8 @@ export default async function handler(req, res) {
 
         await RecentActivity.create({
           operation: `Added ${trackName} track`,
-          status: 'success'
+          status: 'success',
+          date: Date.now()
         })
         return res.status(StatusCodes.CREATED).send(track)
       } catch (err) {
