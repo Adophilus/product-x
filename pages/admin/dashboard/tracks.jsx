@@ -47,7 +47,9 @@ export default function TracksView() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
   const { data, error } = useSWR('/api/tracks', fetcher)
   const tracks =
-    error == null
+    error != null
+      ? []
+      : data == null
       ? []
       : data.map((track) => [
           <div key={track.id} className="flex">

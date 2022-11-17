@@ -65,23 +65,26 @@ function Card({ card }) {
 
 function Cards() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
-  const { data, error } = useSWR(fetcher)
+  const { data, error } = useSWR('/api/overview', fetcher)
+  console.log(data)
   const cards =
-    error == null
+    error != null
+      ? []
+      : data == null
       ? []
       : data
           .map((stat) => {
             switch (stat.name) {
               case 'registeredUsers':
                 return {
-                  name: stat.name,
+                  name: 'Users',
                   href: '/admin/dashboard/users',
                   icon: UserIcon,
                   amount: stat.value
                 }
               case 'registeredTracks':
                 return {
-                  name: stat.name,
+                  name: 'Tracks',
                   href: '/admin/dashboard/tracks',
                   icon: MapIcon,
                   amount: stat.value
@@ -90,7 +93,7 @@ function Cards() {
                 return null
             }
           })
-          .filter()
+          .filter(Boolean)
 
   return (
     <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
