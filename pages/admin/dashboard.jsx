@@ -4,6 +4,7 @@ import { UserIcon, MapIcon, ChartBarIcon } from '@heroicons/react/outline'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { classNames } from '@/utils/helpers'
 import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeader'
+import useSWR from 'swr'
 
 const recentActivities = [
   {
@@ -21,11 +22,6 @@ const statusStyles = {
   processing: 'bg-yellow-100 text-yellow-800',
   failed: 'bg-gray-100 text-gray-800'
 }
-
-const cards = [
-  { name: 'Users', href: '#', icon: UserIcon, amount: 10 },
-  { name: 'Tracks', href: '#', icon: MapIcon, amount: 10 }
-]
 
 const breadcrumbs = [
   { name: 'Dashboard', path: '/admin/dashboard', current: false }
@@ -67,7 +63,35 @@ function Card({ card }) {
   )
 }
 
-function Cards({ cards }) {
+function Cards() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+  const { data, error } = useSWR(fetcher)
+  const cards =
+    error == null
+      ? []
+      : data
+          .map((stat) => {
+            switch (stat.name) {
+              case 'registeredUsers':
+                return {
+                  name: stat.name,
+                  href: '/admin/dashboard/users',
+                  icon: UserIcon,
+                  amount: stat.value
+                }
+              case 'registeredTracks':
+                return {
+                  name: stat.name,
+                  href: '/admin/dashboard/tracks',
+                  icon: MapIcon,
+                  amount: stat.value
+                }
+              default:
+                return null
+            }
+          })
+          .filter()
+
   return (
     <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {cards.map((card) => (
@@ -96,7 +120,7 @@ export default function DashboardView() {
           <h2 className="text-lg leading-6 font-medium text-gray-900">
             Overview
           </h2>
-          <Cards cards={cards} />
+          <Cards />
         </div>
 
         <h2 className="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">
