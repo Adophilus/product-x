@@ -16,6 +16,11 @@ export default connection.models.Track ??
       link: {
         type: String,
         required: true
-      }
+      },
+      registrations: {
+        type: Number,
+        required: true,
+      default: 0
+    }
     })
   )
