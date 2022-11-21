@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -6,7 +7,6 @@ import { classNames } from '@/utils/helpers'
 import { useRouter } from 'next/router'
 import ProductXLogoImg from '@/assets/product-x-logo.png'
 
-console.log(ProductXLogoImg)
 export function SidebarMobile({
   sidebarOpen,
   setSidebarOpen,
@@ -62,7 +62,7 @@ export function SidebarMobile({
               </div>
             </Transition.Child>
             <div className="flex-shrink-0 flex items-center px-4">
-              <img
+              <Image
                 className="h-8 w-auto"
                 src={ProductXLogoImg}
                 alt="Product-X logo"
@@ -128,7 +128,7 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
       {/* Sidebar component, swap this element with another sidebar if you like */}
       <div className="flex flex-col flex-grow bg-primary-700 pt-5 pb-4 overflow-y-auto">
         <div className="flex items-center flex-shrink-0 px-4">
-          <img
+          <Image
             className="h-8 w-auto"
             src={ProductXLogoImg}
             alt="Product-X logo"
