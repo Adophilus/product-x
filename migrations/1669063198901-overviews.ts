@@ -1,3 +1,5 @@
+import Overview from '@/models/Overview'
+
 export async function up (next) {
   await Overview.createMany([
     {
@@ -6,7 +8,7 @@ export async function up (next) {
     },
     {
       name: 'registeredTracks',
-      name: 10
+      value: 10
     }
   ])
   next()
