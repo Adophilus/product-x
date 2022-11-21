@@ -4,7 +4,9 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { classNames } from '@/utils/helpers'
 import { useRouter } from 'next/router'
+import ProductXLogoImg from '@/assets/product-x-logo.png'
 
+console.log(ProductXLogoImg)
 export function SidebarMobile({
   sidebarOpen,
   setSidebarOpen,
@@ -38,7 +40,7 @@ export function SidebarMobile({
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-cyan-700">
+          <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-primary-700">
             <Transition.Child
               as={Fragment}
               enter="ease-in-out duration-300"
@@ -60,10 +62,14 @@ export function SidebarMobile({
               </div>
             </Transition.Child>
             <div className="flex-shrink-0 flex items-center px-4">
-              PRODUCT-X
+              <img
+                className="h-8 w-auto"
+                src={ProductXLogoImg}
+                alt="Product-X logo"
+              />
             </div>
             <nav
-              className="mt-5 flex-shrink-0 h-full divide-y divide-cyan-800 overflow-y-auto"
+              className="mt-5 flex-shrink-0 h-full divide-y divide-primary-800 overflow-y-auto"
               aria-label="Sidebar"
             >
               <div className="px-2 space-y-1">
@@ -72,14 +78,14 @@ export function SidebarMobile({
                     <a
                       className={classNames(
                         item.current
-                          ? 'bg-cyan-800 text-white'
-                          : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                          ? 'bg-primary-800 text-white'
+                          : 'text-primary-100 hover:text-white hover:bg-primary-600',
                         'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                       )}
                       aria-current={item.current ? 'page' : undefined}
                     >
                       <item.icon
-                        className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
+                        className="mr-4 flex-shrink-0 h-6 w-6 text-primary-200"
                         aria-hidden="true"
                       />
                       {item.name}
@@ -91,9 +97,9 @@ export function SidebarMobile({
                 <div className="px-2 space-y-1">
                   {secondaryNavigation.map((item) => (
                     <Link key={item.name} href={item.path}>
-                      <a className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600">
+                      <a className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-primary-100 hover:text-white hover:bg-primary-600">
                         <item.icon
-                          className="mr-4 h-6 w-6 text-cyan-200"
+                          className="mr-4 h-6 w-6 text-primary-200"
                           aria-hidden="true"
                         />
                         {item.name}
@@ -120,10 +126,16 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
   return (
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
       {/* Sidebar component, swap this element with another sidebar if you like */}
-      <div className="flex flex-col flex-grow bg-cyan-700 pt-5 pb-4 overflow-y-auto">
-        <div className="flex items-center flex-shrink-0 px-4">PRODUCT-X</div>
+      <div className="flex flex-col flex-grow bg-primary-700 pt-5 pb-4 overflow-y-auto">
+        <div className="flex items-center flex-shrink-0 px-4">
+          <img
+            className="h-8 w-auto"
+            src={ProductXLogoImg}
+            alt="Product-X logo"
+          />
+        </div>
         <nav
-          className="mt-5 flex-1 flex flex-col divide-y divide-cyan-800 overflow-y-auto"
+          className="mt-5 flex-1 flex flex-col divide-y divide-primary-800 overflow-y-auto"
           aria-label="Sidebar"
         >
           <div className="px-2 space-y-1">
@@ -134,14 +146,14 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
                   <a
                     className={classNames(
                       _isCurrentRoute
-                        ? 'bg-cyan-800 text-white'
-                        : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                        ? 'bg-primary-800 text-white'
+                        : 'text-primary-100 hover:text-white hover:bg-primary-600',
                       'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
                     )}
                     aria-current={isCurrentRoute ? 'page' : null}
                   >
                     <item.icon
-                      className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
+                      className="mr-4 flex-shrink-0 h-6 w-6 text-primary-200"
                       aria-hidden="true"
                     />
                     {item.name}
@@ -159,13 +171,13 @@ export function SidebarDesktop({ navigation, secondaryNavigation }) {
                     <a
                       className={classNames(
                         _isCurrentRoute
-                          ? 'bg-cyan-800 text-white'
-                          : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                          ? 'bg-primary-800 text-white'
+                          : 'text-primary-100 hover:text-white hover:bg-primary-600',
                         'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
                       )}
                     >
                       <item.icon
-                        className="mr-4 h-6 w-6 text-cyan-200"
+                        className="mr-4 h-6 w-6 text-primary-200"
                         aria-hidden="true"
                       />
                       {item.name}
