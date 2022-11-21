@@ -1,4 +1,3 @@
-import Overview from '@/models/Overview'
 import RecentActivity from '@/models/RecentActivity'
 import Track from '@/models/Track'
 import User from '@/models/User'
@@ -9,10 +8,11 @@ export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
       await Track.deleteMany()
-      await Overview.deleteMany()
       await RecentActivity.deleteMany()
       await User.deleteMany()
-      return res.status(StatusCodes.OK).send(ResponseMessages.success.DeletedRecords)
+      return res
+        .status(StatusCodes.OK)
+        .send(ResponseMessages.success.DeletedRecords)
     default:
       return res
         .status(StatusCodes.METHOD_NOT_ALLOWED)
