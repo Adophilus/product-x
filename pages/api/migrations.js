@@ -4,7 +4,7 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 const actions = {
   up: [
     async () => {
-      await Overview.createMany([
+      await Overview.create([
         {
           name: 'registeredUsers',
           value: 10
@@ -35,7 +35,7 @@ const Operations = {
 }
 
 export default async function handler(req, res) {
-  const operation = req.params.operation ?? Operations.UP
+  const operation = req.query.operation ?? Operations.UP
   for (const action of actions[operation]) {
     await action()
   }
