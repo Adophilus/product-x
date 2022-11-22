@@ -17,7 +17,7 @@
     "allowUnreachableCode": false,
     "module": "ESNext",
     "moduleResolution": "node",
-    "target": "ESNext",
+    "target": "Node",
     "outDir": "../build"
   }
 }
