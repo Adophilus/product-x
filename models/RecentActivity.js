@@ -3,28 +3,19 @@ import mongoose from 'mongoose'
 
 export default connection.models.Track ??
   connection.model(
-    'Track',
+    'RecentActivity',
     mongoose.Schema({
-      slug: {
+      operation: {
         type: String,
         required: true
       },
-      name: {
+      status: {
         type: String,
         required: true
       },
-      link: {
+      date: {
         type: String,
         required: true
-      },
-      description: {
-        type: String,
-        required: true
-      },
-      registrations: {
-        type: Number,
-        required: true,
-        default: 0
       }
     })
   )

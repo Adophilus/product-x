@@ -1,11 +1,15 @@
 import connection from '@/utils/db'
 import mongoose from 'mongoose'
 
-export default connection.models.User ??
+export default connection.models.Stat ??
   connection.model(
-    'User',
+    'Overview',
     mongoose.Schema({
-      email: {
+      name: {
+        type: String,
+        required: true
+      },
+      value: {
         type: String,
         required: true
       }

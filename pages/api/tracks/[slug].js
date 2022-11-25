@@ -1,21 +1,17 @@
 import Track from "@/models/Track";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
-export default async function handler(req, res) {
-  const trackSlug = req.params.slug;
+export default async function handler (req, res) {
+  const trackSlug = req.params.slug
+  let track
   switch (req.method) {
-    case "GET":
-      const track = await Track.findOne({ slug: trackSlug });
+    case 'GET':
+      track = await Track.findOne({ slug: trackSlug })
       if (!track)
-        return res
-          .status(StatusCodes.NOT_FOUND)
-          .send({ error: "Inexistent track!" });
-      return res.status(StatusCodes.OK).send(track);
-    case "PATCH":
-      const track = await Track.findOneAndUpdate(
-        { slug: trackSlug },
-        new Track(req.body)
-      );
+        return res.status(StatusCodes.NOT_FOUND).send({ error: 'Inexistent track!' })
+      return res.status(StatusCodes.OK).send(track)
+    case 'PATCH':
+      track = await Track.findOneAndUpdate({ slug: trackSlug }, new Track(req.body))
       if (!track)
         return res
           .status(StatusCodes.NOT_FOUND)
