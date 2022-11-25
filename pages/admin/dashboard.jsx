@@ -8,6 +8,8 @@ import useSWR from 'swr'
 import TableComponent from '@/components/admin/dashboard/elements/table'
 import { formatEpoch } from '@/utils/helpers'
 
+// the dashboard page
+
 const tableHeaders = [
   { name: 'Operation' },
   { name: 'Status' },
