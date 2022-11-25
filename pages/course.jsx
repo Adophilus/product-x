@@ -99,6 +99,7 @@ export default function Course() {
         <motion.div layout className={`${grid === false ? 'column' : 'grid'}`}>
           {courseDependent.map((course) => (
             <motion.div
+              key={course.category}
               className={` ${grid === false ? 'column-div' : 'course-card'}`}
             >
               <Image

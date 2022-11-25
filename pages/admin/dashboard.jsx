@@ -46,20 +46,23 @@ function RecentActivities() {
               </p>
             </a>
           </div>,
-          <span
-            className={classNames(
-              statusStyles[recentActivity.status],
-              'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize'
-            )}
-          >
-            {recentActivity.status}
-          </span>,
-          <time
-            className="text-gray-500"
-            dateTime={formatEpoch(recentActivity.date)}
-          >
-            {formatEpoch(recentActivity.date)}
-          </time>
+          <>
+            <span
+              className={classNames(
+                statusStyles[recentActivity.status],
+                'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize'
+              )}
+            >
+              {recentActivity.status}
+            </span>
+            ,
+            <time
+              className="text-gray-500"
+              dateTime={formatEpoch(recentActivity.date)}
+            >
+              {formatEpoch(recentActivity.date)}
+            </time>
+          </>
         ])
   return (
     <>
