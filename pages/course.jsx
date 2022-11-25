@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useRef } from 'react'
 import Header from '../components/Header'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion:Motion } from 'framer-motion'
 import { BsColumnsGap } from 'react-icons/bs'
 
 export default function Course() {
@@ -96,9 +96,9 @@ export default function Course() {
           }}
           className="grid-icon"
         />
-        <motion.div layout className={`${grid === false ? 'column' : 'grid'}`}>
+        <Motion.div layout className={`${grid === false ? 'column' : 'grid'}`}>
           {courseDependent.map((course) => (
-            <motion.div
+            <Motion.div
               key={course.category}
               className={` ${grid === false ? 'column-div' : 'course-card'}`}
             >
@@ -108,9 +108,9 @@ export default function Course() {
                 layout="fill"
                 className="course-image"
               />
-            </motion.div>
+            </Motion.div>
           ))}
-        </motion.div>
+        </Motion.div>
       </section>
     </>
   )

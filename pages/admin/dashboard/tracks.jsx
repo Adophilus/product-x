@@ -180,7 +180,7 @@ export default function TracksView() {
               </p>
             </a>
           </div>,
-          <>
+          <span key={track.id}>
             <span className="flex text-gray-500">{track.registrations}</span>,
             <time
               className="text-gray-500"
@@ -188,7 +188,7 @@ export default function TracksView() {
             >
               {formatEpoch(1668502165546)}
             </time>
-          </>
+          </span>
         ])
   const user = useRef({
     firstName: 'John',

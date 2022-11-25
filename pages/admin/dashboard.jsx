@@ -46,7 +46,7 @@ function RecentActivities() {
               </p>
             </a>
           </div>,
-          <>
+          <span key={recentActivity.id}>
             <span
               className={classNames(
                 statusStyles[recentActivity.status],
@@ -62,7 +62,7 @@ function RecentActivities() {
             >
               {formatEpoch(recentActivity.date)}
             </time>
-          </>
+          </span>
         ])
   return (
     <>
