@@ -1,0 +1,5 @@
+black: #040404
+brightOrange: #ec6324
+purple: #241c24
+brown: #5f220a
+grey: #2c2c2c
