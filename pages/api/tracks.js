@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       } catch (err) {
         console.log(err)
         return res
-          .send(StatusCodes.INTERNAL_SERVER_ERROR)
+          .status(StatusCodes.INTERNAL_SERVER_ERROR)
           .send({ error: ReasonPhrases.INTERNAL_SERVER_ERROR })
       }
     default:

@@ -34,7 +34,7 @@ const tableHeaders = [
 ]
 
 function AddTrackForm({ track: originalTrack, onSubmit, onCancel }) {
-  const track = Object.assign(originalTrack)
+  const track = { ...originalTrack }
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -162,10 +162,9 @@ export default function TracksView() {
   const currentTrack = useRef({ name: '', link: '', description: '' })
 
   const addTrack = async (track) => {
-    console.log(track)
     try {
       if (track.id)
-        await fetch(`/api/tracks/${trackSlug}`, {
+        await fetch(`/api/tracks/${track.slug}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
