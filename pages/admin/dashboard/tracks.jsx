@@ -1,7 +1,12 @@
 import Layout from '@/components/admin/dashboard/layout'
 import { useRef, useState } from 'react'
 import useSWR from 'swr'
-import { PlusIcon, UserIcon, BookOpenIcon } from '@heroicons/react/outline'
+import {
+  DotsVerticalIcon,
+  PlusIcon,
+  UserIcon,
+  BookOpenIcon
+} from '@heroicons/react/outline'
 import Button from '@/components/admin/dashboard/elements/button'
 import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeader'
 import TableComponent from '@/components/admin/dashboard/elements/table'
@@ -180,14 +185,23 @@ export default function TracksView() {
               </p>
             </a>
           </div>,
+          <span key={track.id} className="flex text-gray-500">
+            {track.registrations}
+          </span>,
+          <time
+            key={track.id}
+            className="text-gray-500"
+            dateTime={formatEpoch(1668502165546)}
+          >
+            {formatEpoch(1668502165546)}
+          </time>,
           <span key={track.id}>
-            <span className="flex text-gray-500">{track.registrations}</span>,
-            <time
-              className="text-gray-500"
-              dateTime={formatEpoch(1668502165546)}
+            <button
+              type="button"
+              className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             >
-              {formatEpoch(1668502165546)}
-            </time>
+              <DotsVerticalIcon className="h-6 w-6" />
+            </button>
           </span>
         ])
   const user = useRef({
