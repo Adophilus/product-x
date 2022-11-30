@@ -1,3 +1,5 @@
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
 import Layout from '@/components/admin/dashboard/layout'
 import { useRef, useState } from 'react'
 import useSWR from 'swr'
@@ -5,12 +7,14 @@ import {
   DotsVerticalIcon,
   PlusIcon,
   UserIcon,
-  BookOpenIcon
+  BookOpenIcon,
+  PencilIcon,
+  TrashIcon
 } from '@heroicons/react/outline'
 import Button from '@/components/admin/dashboard/elements/button'
 import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeader'
 import TableComponent from '@/components/admin/dashboard/elements/table'
-import { formatEpoch } from '@/utils/helpers'
+import { formatEpoch, classNames } from '@/utils/helpers'
 
 const breadcrumbs = [
   { name: 'Tracks', path: '/admin/dashboard/tracks', current: false }
@@ -195,14 +199,70 @@ export default function TracksView() {
           >
             {formatEpoch(1668502165546)}
           </time>,
-          <span key={track.id}>
-            <button
+          <Menu
+            key={track.id}
+            as="div"
+            className="relative inline-block text-left"
+          >
+            <Menu.Button
               type="button"
               className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             >
               <DotsVerticalIcon className="h-6 w-6" />
-            </button>
-          </span>
+            </Menu.Button>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+                <div className="py-1">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <a
+                        href="#"
+                        className={classNames(
+                          active
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        <PencilIcon
+                          className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                        Edit
+                      </a>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <a
+                        href="#"
+                        className={classNames(
+                          active
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        <TrashIcon
+                          className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                        Delete
+                      </a>
+                    )}
+                  </Menu.Item>
+                </div>
+              </Menu.Items>
+            </Transition>
+          </Menu>
         ])
   const user = useRef({
     firstName: 'John',
