@@ -33,7 +33,7 @@ const tableHeaders = [
   { name: 'Date Added' }
 ]
 
-function AddTrackForm({ track, onSubmit }) {
+function AddTrackForm({ track, onSubmit, onCancel }) {
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -127,6 +127,7 @@ function AddTrackForm({ track, onSubmit }) {
                 <div className="flex justify-end">
                   <button
                     type="button"
+                    onClick={() => onCancel ?? onCancel()}
                     className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                   >
                     Cancel
@@ -179,6 +180,7 @@ export default function TracksView() {
 
   const editTrack = (track) => {
     currentTrack = track
+    console.log(track)
     setIsAddingTrack(true)
   }
 
@@ -309,7 +311,11 @@ export default function TracksView() {
       breadcrumbs={breadcrumbs}
     >
       {isAddingTrack && (
-        <AddTrackForm track={currentTrack} onSubmit={addTrack} />
+        <AddTrackForm
+          track={currentTrack}
+          onSubmit={addTrack}
+          onCancel={() => setIsAddingTrack(false)}
+        />
       )}
       <TableComponent headers={tableHeaders} records={tracks} />
     </Layout>
