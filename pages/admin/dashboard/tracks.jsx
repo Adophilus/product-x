@@ -33,32 +33,7 @@ const tableHeaders = [
   { name: 'Date Added' }
 ]
 
-function AddTrackForm() {
-  const trackName = useRef()
-  const trackLink = useRef()
-  const trackDescription = useRef()
-
-  const onSubmit = async () => {
-    try {
-      await fetch('/api/tracks', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: trackName.current.value,
-          link: trackLink.current.value,
-          description: trackDescription.current.value
-        })
-      })
-      trackName.current.value = ''
-      trackLink.current.value = ''
-      trackDescription.current.value = ''
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
+function AddTrackForm({ track, onSubmit }) {
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,7 +43,7 @@ function AddTrackForm() {
               className="space-y-8 divide-y divide-gray-200"
               onSubmit={(e) => {
                 e.preventDefault()
-                onSubmit()
+                onSubmit(track)
               }}
             >
               <div className="space-y-8 divide-y divide-gray-200">
@@ -92,7 +67,8 @@ function AddTrackForm() {
                       </label>
                       <div className="mt-1">
                         <input
-                          ref={trackName}
+                          onInput={(e) => (track.name = e.target.value)}
+                          value={track.name}
                           type="text"
                           name="track-name"
                           id="track-name"
@@ -112,7 +88,8 @@ function AddTrackForm() {
                       </label>
                       <div className="mt-1">
                         <input
-                          ref={trackLink}
+                          value={track.value}
+                          onInput={(e) => (track.link = e.target.value)}
                           type="text"
                           name="track-link"
                           id="track-link"
@@ -129,7 +106,8 @@ function AddTrackForm() {
                       </label>
                       <div className="mt-1">
                         <textarea
-                          ref={trackDescription}
+                          value={track.description}
+                          onInput={(e) => (track.description = e.target.value)}
                           id="about"
                           name="about"
                           rows={3}
@@ -172,7 +150,44 @@ function AddTrackForm() {
 export default function TracksView() {
   const [isAddingTrack, setIsAddingTrack] = useState(false)
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
-  const { data, error } = useSWR('/api/tracks', fetcher)
+  const { data, refetch, error } = useSWR('/api/tracks', fetcher)
+  const currentTrack = { name: '', link: '', description: '' }
+
+  const addTrack = async ({ track }) => {
+    try {
+      if (track.id)
+        await fetch('/api/tracks', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(track)
+        })
+      else
+        await fetch('/api/tracks', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(track)
+        })
+    } catch (err) {
+      console.log(err)
+    }
+    setIsAddingTrack(false)
+  }
+
+  const editTrack = (track) => {
+    currentTrack = track
+    setIsAddingTrack(true)
+  }
+
+  const deleteTrack = async (trackSlug) => {
+    // use response to display a popup notification
+    await fetch(`/api/tracks/${trackSlug}`, { method: 'DELETE' })
+    refetch()
+  }
+
   const tracks =
     error != null
       ? []
@@ -204,12 +219,14 @@ export default function TracksView() {
             as="div"
             className="relative inline-block text-left"
           >
-            <Menu.Button
-              type="button"
-              className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-            >
-              <DotsVerticalIcon className="h-6 w-6" />
-            </Menu.Button>
+            <div>
+              <Menu.Button
+                type="button"
+                className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              >
+                <DotsVerticalIcon className="h-6 w-6" />
+              </Menu.Button>
+            </div>
             <Transition
               as={Fragment}
               enter="transition ease-out duration-100"
@@ -218,6 +235,7 @@ export default function TracksView() {
               leave="transition ease-in duration-75"
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
+              className="absolute z-10 bg-white focus:border-0 focus:outline-0"
             >
               <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
                 <div className="py-1">
@@ -225,6 +243,7 @@ export default function TracksView() {
                     {({ active }) => (
                       <a
                         href="#"
+                        onClick={() => editTrack(track.id)}
                         className={classNames(
                           active
                             ? 'bg-gray-100 text-gray-900'
@@ -244,6 +263,7 @@ export default function TracksView() {
                     {({ active }) => (
                       <a
                         href="#"
+                        onClick={() => deleteTrack(track.slug)}
                         className={classNames(
                           active
                             ? 'bg-gray-100 text-gray-900'
@@ -288,7 +308,9 @@ export default function TracksView() {
       }
       breadcrumbs={breadcrumbs}
     >
-      {isAddingTrack && <AddTrackForm />}
+      {isAddingTrack && (
+        <AddTrackForm track={currentTrack} onSubmit={addTrack} />
+      )}
       <TableComponent headers={tableHeaders} records={tracks} />
     </Layout>
   )
