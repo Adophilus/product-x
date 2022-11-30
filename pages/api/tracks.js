@@ -9,7 +9,6 @@ export default async function handler(req, res) {
       const tracks = await Track.find()
       return res.status(StatusCodes.OK).send(tracks)
     case 'PUT':
-      console.log(req.body)
       const trackName = req.body.name
       const trackLink = req.body.link
       const trackDecription = req.body.description
@@ -31,6 +30,7 @@ export default async function handler(req, res) {
           status: 'success',
           date: Date.now()
         })
+
         return res.status(StatusCodes.CREATED).send(track)
       } catch (err) {
         console.log(err)
