@@ -33,7 +33,8 @@ const tableHeaders = [
   { name: 'Date Added' }
 ]
 
-function AddTrackForm({ track, onSubmit, onCancel }) {
+function AddTrackForm({ track: originalTrack, onSubmit, onCancel }) {
+  const track = Object.assign(originalTrack)
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,8 +68,10 @@ function AddTrackForm({ track, onSubmit, onCancel }) {
                       </label>
                       <div className="mt-1">
                         <input
-                          onInput={(e) => (track.name = e.target.value)}
-                          value={track.name}
+                          onChange={(e) => {
+                            track.name = e.target.value
+                          }}
+                          defaultValue={track.name}
                           type="text"
                           name="track-name"
                           id="track-name"
@@ -88,8 +91,10 @@ function AddTrackForm({ track, onSubmit, onCancel }) {
                       </label>
                       <div className="mt-1">
                         <input
-                          value={track.value}
-                          onInput={(e) => (track.link = e.target.value)}
+                          onChange={(e) => {
+                            track.link = e.target.value
+                          }}
+                          defaultValue={track.link}
                           type="text"
                           name="track-link"
                           id="track-link"
@@ -106,8 +111,10 @@ function AddTrackForm({ track, onSubmit, onCancel }) {
                       </label>
                       <div className="mt-1">
                         <textarea
-                          value={track.description}
-                          onInput={(e) => (track.description = e.target.value)}
+                          onChange={(e) => {
+                            track.description = e.target.value
+                          }}
+                          defaultValue={track.description}
                           id="about"
                           name="about"
                           rows={3}
@@ -127,7 +134,7 @@ function AddTrackForm({ track, onSubmit, onCancel }) {
                 <div className="flex justify-end">
                   <button
                     type="button"
-                    onClick={() => onCancel ?? onCancel()}
+                    onClick={() => (!!onCancel ? onCancel() : null)}
                     className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                   >
                     Cancel
@@ -151,13 +158,14 @@ function AddTrackForm({ track, onSubmit, onCancel }) {
 export default function TracksView() {
   const [isAddingTrack, setIsAddingTrack] = useState(false)
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
-  const { data, refetch, error } = useSWR('/api/tracks', fetcher)
-  const currentTrack = { name: '', link: '', description: '' }
+  const { data, mutate, error } = useSWR('/api/tracks', fetcher)
+  const currentTrack = useRef({ name: '', link: '', description: '' })
 
-  const addTrack = async ({ track }) => {
+  const addTrack = async (track) => {
+    console.log(track)
     try {
       if (track.id)
-        await fetch('/api/tracks', {
+        await fetch(`/api/tracks/${trackSlug}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -179,15 +187,15 @@ export default function TracksView() {
   }
 
   const editTrack = (track) => {
-    currentTrack = track
-    console.log(track)
+    currentTrack.current = track
     setIsAddingTrack(true)
   }
 
   const deleteTrack = async (trackSlug) => {
     // use response to display a popup notification
     await fetch(`/api/tracks/${trackSlug}`, { method: 'DELETE' })
-    refetch()
+    console.log(mutate)
+    mutate()
   }
 
   const tracks =
@@ -245,7 +253,7 @@ export default function TracksView() {
                     {({ active }) => (
                       <a
                         href="#"
-                        onClick={() => editTrack(track.id)}
+                        onClick={() => editTrack(track)}
                         className={classNames(
                           active
                             ? 'bg-gray-100 text-gray-900'
@@ -303,8 +311,14 @@ export default function TracksView() {
               setIsAddingTrack((_isAddingTrack) => !_isAddingTrack)
             }
           >
-            Add Track
-            <PlusIcon className="ml-3 -mr-1 h-5 w-5" aria-hidden="true" />
+            {isAddingTrack ? (
+              'Cancel'
+            ) : (
+              <>
+                Add Track
+                <PlusIcon className="ml-3 -mr-1 h-5 w-5" aria-hidden="true" />
+              </>
+            )}
           </Button>
         </PageHeaderComponent>
       }
@@ -312,7 +326,7 @@ export default function TracksView() {
     >
       {isAddingTrack && (
         <AddTrackForm
-          track={currentTrack}
+          track={currentTrack.current}
           onSubmit={addTrack}
           onCancel={() => setIsAddingTrack(false)}
         />
