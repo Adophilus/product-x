@@ -6,20 +6,17 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 export default async function handler(req, res) {
   const { slug } = req.query
   let track = await Track.findOne({ slug })
+  if (!track)
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .send({ error: 'Inexistent track!' })
+
   switch (req.method) {
     case 'GET':
-      if (!track)
-        return res
-          .status(StatusCodes.NOT_FOUND)
-          .send({ error: 'Inexistent track!' })
       return res.status(StatusCodes.OK).send(track)
     case 'PATCH':
       const newTrack = { ...req.body }
-      console.log(newTrack)
-      if (!track)
-        return res
-          .status(StatusCodes.NOT_FOUND)
-          .send({ error: 'Inexistent track!' })
+      newTrack.slug = newTrack.name
 
       await RecentActivity.create({
         operation: `Updated track ${track.name} -> ${newTrack.name}`,
@@ -27,7 +24,6 @@ export default async function handler(req, res) {
         date: Date.now()
       })
 
-      newTrack.slug = newTrack.name
       await Track.updateOne({ slug }, newTrack)
       return res.status(StatusCodes.OK).send({ message: ReasonPhrases.OK })
     case 'DELETE':
