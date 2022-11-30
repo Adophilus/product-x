@@ -30,7 +30,8 @@ const tableHeaders = [
       </span>
     )
   },
-  { name: 'Date Added' }
+  { name: 'Date Added' },
+  { name: '' }
 ]
 
 function AddTrackForm({ track: originalTrack, onSubmit, onCancel }) {
