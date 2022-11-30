@@ -13,10 +13,7 @@ export default async function handler(req, res) {
           .send({ error: 'Inexistent track!' })
       return res.status(StatusCodes.OK).send(track)
     case 'PATCH':
-      track = await Track.findOneAndUpdate(
-        { slug: trackSlug },
-        new Track(req.body)
-      )
+      track = await Track.updateOne({ slug: trackSlug }, req.body)
       if (!track)
         return res
           .status(StatusCodes.NOT_FOUND)
