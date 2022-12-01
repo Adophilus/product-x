@@ -18,13 +18,15 @@ export default async function handler(req, res) {
       const newTrack = { ...req.body }
       newTrack.slug = newTrack.name
 
-      await RecentActivity.create({
-        operation: `Updated track ${track.name} -> ${newTrack.name}`,
-        status: 'success',
-        date: Date.now()
-      })
+      // await RecentActivity.create({
+      //   operation: `Updated track ${track.name} -> ${newTrack.name}`,
+      //   status: 'success',
+      //   date: Date.now()
+      // })
 
-      await Track.updateOne({ slug }, newTrack)
+      track.set(newTrack)
+      await track.save()
+
       return res.status(StatusCodes.OK).send({ message: ReasonPhrases.OK })
     case 'DELETE':
       try {
