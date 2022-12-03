@@ -1,0 +1,21 @@
+environment:
+  vars:
+    api: "http://localhost:3000/api"
+requests:
+  - name: CREATE a track
+    url: "{{api}}/tracks" 
+    method: PUT 
+    body:
+      name: Test
+      description: A test track
+      link: https://google.com
+    expect:
+      status: 201
+    set:
+      - var: track_slug
+        from: slug
+  - name: DELETE a track
+    url: "{{api}}/tracks/{{track_slug}}"
+    method: DELETE
+    expect:
+      status: 409
