@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && pnpm migrate",
     "start": "next start",
     "lint": "next lint",
     "migrate": "pnpm migrate:down && pnpm migrate:up",
