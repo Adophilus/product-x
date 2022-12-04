@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useRef } from 'react'
 import Header from '../components/Header'
 import Image from 'next/image'
-import { motion:Motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 import { BsColumnsGap } from 'react-icons/bs'
 
 export default function Course() {
