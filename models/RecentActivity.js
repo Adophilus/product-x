@@ -1,5 +1,5 @@
-import { db, Tables } from '@/utils/db'
-import Sequelize from 'sequelize'
+const { db, Tables } = require('../utils/db')
+const Sequelize = require('sequelize')
 
 const RecentActivity = db.define(Tables.recentActivities, {
   operation: {
@@ -10,9 +10,9 @@ const RecentActivity = db.define(Tables.recentActivities, {
     type: Sequelize.STRING
   },
   date: {
-    type: Sequelize.DATETIME,
+    type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
 })
 
-export default RecentActivity
+module.exports = RecentActivity

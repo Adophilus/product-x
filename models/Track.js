@@ -1,7 +1,7 @@
-import { db, Tables } from '@/utils/db'
-import Sequelize from 'sequelize'
+const { db, Tables } = require('../utils/db')
+const Sequelize = require('sequelize')
 
-const User = db.define(Tables.tracks, {
+const Track = db.define(Tables.tracks, {
   name: {
     type: Sequelize.STRING,
     unique: true
@@ -23,4 +23,4 @@ const User = db.define(Tables.tracks, {
   }
 })
 
-export default User
+module.exports = Track

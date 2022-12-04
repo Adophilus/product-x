@@ -1,5 +1,5 @@
-import { db, Tables } from '@/utils/db'
-import Sequelize from 'sequelize'
+const { db, Tables } = require('../utils/db')
+const Sequelize = require('sequelize')
 
 const User = db.define(Tables.users, {
   name: {
@@ -9,4 +9,4 @@ const User = db.define(Tables.users, {
   }
 })
 
-export default User
+module.exports = User

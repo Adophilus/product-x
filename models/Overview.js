@@ -1,5 +1,5 @@
-import { db, Tables } from '@/utils/db'
-import Sequelize from 'sequelize'
+const { db, Tables } = require('../utils/db')
+const Sequelize = require('sequelize')
 
 const Overview = db.define(Tables.overviews, {
   name: { type: Sequelize.STRING, unique: true },
@@ -8,4 +8,4 @@ const Overview = db.define(Tables.overviews, {
   }
 })
 
-export default Overview
+module.exports = Overview
