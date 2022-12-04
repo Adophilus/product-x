@@ -1,12 +1,6 @@
 const { db, Tables } = require('../utils/db')
-const Sequelize = require('sequelize')
+const Schema = require('../schema/User')
 
-const User = db.define(Tables.users, {
-  name: {
-    type: Sequelize.STRING,
-    unique: true,
-    validate: { isEmail: true }
-  }
-})
+const User = db.define(Tables.users, Schema)
 
 module.exports = User
