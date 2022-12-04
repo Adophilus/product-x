@@ -11,6 +11,7 @@ export default async function handler(req, res) {
     case 'PUT':
       const newTrack = req.body
       newTrack.slug = newTrack.name.toLowerCase().replace(' ', '-')
+      newTrack.registrations = 0
 
       try {
         const track = await Track.create(newTrack)
