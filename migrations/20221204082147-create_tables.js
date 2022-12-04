@@ -18,9 +18,9 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    queryInterface.dropTable(Tables.overviews, Schema.Overview)
-    queryInterface.dropTable(Tables.recentActivities, Schema.RecentActivity)
-    queryInterface.dropTable(Tables.tracks, Schema.Track)
-    queryInterface.dropTable(Tables.users, Schema.User)
+    queryInterface.dropTable(Tables.overviews)
+    queryInterface.dropTable(Tables.recentActivities)
+    queryInterface.dropTable(Tables.tracks)
+    queryInterface.dropTable(Tables.users)
   }
 }
