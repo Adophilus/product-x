@@ -35,7 +35,7 @@ export default function Course() {
   ])
   const [activeCategory, setActiveCategory] = useState('all')
 
-  const courses = useRef([
+  const courses = [
     {
       image: '/wallpaper (1).jpeg',
       category: 'data science'
@@ -56,7 +56,7 @@ export default function Course() {
       image: '/wallpaper (1).jpg',
       category: 'all'
     }
-  ])
+  ]
   const [courseDependent, setCourseDependent] = useState(courses)
   const [grid, setGrid] = useState(true)
   return (
