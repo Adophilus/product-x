@@ -161,6 +161,7 @@ export default function TracksView() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
   const { data, mutate, error } = useSWR('/api/tracks', fetcher)
   const currentTrack = useRef({ name: '', link: '', description: '' })
+  console.log(data)
 
   const addTrack = async (track) => {
     try {
