@@ -6,27 +6,23 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
-      const tracks = await Track.find()
+      const tracks = await Track.findAll()
       return res.status(StatusCodes.OK).send(tracks)
     case 'PUT':
-      const trackName = req.body.name
-      const trackLink = req.body.link
-      const trackDecription = req.body.description
-      const trackSlug = req.body.name.toLowerCase().replace(' ', '-')
-      try {
-        const track = await Track.create({
-          name: trackName,
-          link: trackLink,
-          description: trackDecription,
-          slug: trackSlug
-        })
+      const newTrack = req.body
+      newTrack.slug = newTrack.name.toLowerCase().replace(' ', '-')
 
-        const oldOverview = await Overview.findOne({ name: 'registeredTracks' })
+      try {
+        const track = await Track.create(newTrack)
+
+        const oldOverview = await Overview.findOne({
+          where: { name: 'registeredTracks' }
+        })
         oldOverview.value += 1
         await oldOverview.save()
 
         await RecentActivity.create({
-          operation: `Added ${trackName} track`,
+          operation: `Added ${newTrack.name} track`,
           status: 'success',
           date: Date.now()
         })
