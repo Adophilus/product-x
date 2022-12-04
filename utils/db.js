@@ -1,18 +1,19 @@
-import Sequelize from 'sequelize'
-import * as dotenv from 'dotenv'
+const Sequelize = require('sequelize')
+const dotenv = require('dotenv')
 
 dotenv.config()
 
-export const db = new Sequelize({
+const db = new Sequelize({
   dialect: 'sqlite',
   storage: './db.sqlite'
 })
 
-export const Tables = {
+exports.Tables = {
   overviews: 'overviews',
   tracks: 'tracks',
   users: 'users',
   recentActivities: 'recent_activities'
 }
 
-export default db
+exports.db = db
+module.export = db
