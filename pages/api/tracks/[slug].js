@@ -1,10 +1,11 @@
 import Track from '@/models/Track'
 import RecentActivity from '@/models/RecentActivity'
-import Overview from '@/models/Overview'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
+import Overview from '@/models/Overview'
 
 export default async function handler(req, res) {
   const { slug } = req.query
+
   let track = await Track.findOne({ slug })
   if (!track)
     return res
@@ -18,37 +19,37 @@ export default async function handler(req, res) {
       const newTrack = { ...req.body }
       newTrack.slug = newTrack.name
 
-      // await RecentActivity.create({
-      //   operation: `Updated track ${track.name} -> ${newTrack.name}`,
-      //   status: 'success',
-      //   date: Date.now()
-      // })
+      await RecentActivity.create({
+        operation: `Updated track ${track.name} -> ${newTrack.name}`,
+        status: 'success',
+        date: Date.now()
+      })
 
-      track.set(newTrack)
-      await track.save()
+      // track.set(newTrack)
+      // await track.save()
 
       return res.status(StatusCodes.OK).send({ message: ReasonPhrases.OK })
     case 'DELETE':
-      try {
-        await Track.deleteOne({ slug })
+      // try {
+      // await Track.deleteOne({ slug })
 
-        const oldOverview = await Overview.findOne({ name: 'registeredTracks' })
-        oldOverview.value -= 1
-        await oldOverview.save()
+      const oldOverview = await Overview.findOne({ name: 'registeredTracks' })
+      oldOverview.value -= 1
+      await oldOverview.save()
 
-        await RecentActivity.create({
-          operation: `Deleted track ${track.name}`,
-          status: 'success',
-          date: Date.now()
-        })
+      await RecentActivity.create({
+        operation: `Deleted track ${track.name}`,
+        status: 'success',
+        date: Date.now()
+      })
 
-        return res.status(StatusCodes.GONE).send({ message: 'Deleted track!' })
-      } catch (err) {
-        logger.error(err)
-        return res
-          .status(StatusCodes.INTERNAL_SERVER_ERROR)
-          .send({ error: ReasonPhrases.INTERNAL_SERVER_ERROR })
-      }
+      return res.status(StatusCodes.GONE).send({ message: 'Deleted track!' })
+    // } catch (err) {
+    //   console.log(err)
+    //   return res
+    //     .status(StatusCodes.INTERNAL_SERVER_ERROR)
+    //     .send({ error: ReasonPhrases.INTERNAL_SERVER_ERROR })
+    // }
     default:
       return res
         .status(StatusCodes.METHOD_NOT_ALLOWED)
