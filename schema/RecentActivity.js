@@ -1,9 +1,13 @@
 const Sequelize = require('sequelize')
 
 const Schema = {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   operation: {
-    type: Sequelize.STRING,
-    unique: true
+    type: Sequelize.STRING
   },
   status: {
     type: Sequelize.STRING

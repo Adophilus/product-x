@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const Schema = {
   name: {
     type: Sequelize.STRING,
-    unique: true,
+    primaryKey: true,
     validate: { isEmail: true }
   }
 }

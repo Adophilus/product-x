@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 
 const Schema = {
-  name: { type: Sequelize.STRING, unique: true },
+  name: { type: Sequelize.STRING, primaryKey: true },
   value: {
     type: Sequelize.INTEGER
   }
