@@ -18,4 +18,4 @@ requests:
     url: "{{api}}/tracks/{{track_slug}}"
     method: DELETE
     expect:
-      status: 409
+      status: 410
