@@ -1,21 +1,18 @@
-import connection from '@/utils/db'
-import mongoose from 'mongoose'
+import { db, Tables } from '@/utils/db'
+import Sequelize from 'sequelize'
 
-export default connection.models.Track ??
-  connection.model(
-    'RecentActivity',
-    mongoose.Schema({
-      operation: {
-        type: String,
-        required: true
-      },
-      status: {
-        type: String,
-        required: true
-      },
-      date: {
-        type: Date,
-        required: true
-      }
-    })
-  )
+const RecentActivity = db.define(Tables.recentActivities, {
+  operation: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  status: {
+    type: Sequelize.STRING
+  },
+  date: {
+    type: Sequelize.DATETIME,
+    defaultValue: Sequelize.NOW
+  }
+})
+
+export default RecentActivity

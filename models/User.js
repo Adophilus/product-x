@@ -1,13 +1,12 @@
-import connection from '@/utils/db'
-import mongoose from 'mongoose'
+import { db, Tables } from '@/utils/db'
+import Sequelize from 'sequelize'
 
-export default connection.models.User ??
-  connection.model(
-    'User',
-    mongoose.Schema({
-      email: {
-        type: String,
-        required: true
-      }
-    })
-  )
+const User = db.define(Tables.users, {
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+    validate: { isEmail: true }
+  }
+})
+
+export default User

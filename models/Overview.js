@@ -1,17 +1,11 @@
-import connection from '@/utils/db'
-import mongoose from 'mongoose'
+import { db, Tables } from '@/utils/db'
+import Sequelize from 'sequelize'
 
-export default connection.models.Stat ??
-  connection.model(
-    'Overview',
-    mongoose.Schema({
-      name: {
-        type: String,
-        required: true
-      },
-      value: {
-        type: Number,
-        required: true
-      }
-    })
-  )
+const Overview = db.define(Tables.overviews, {
+  name: { type: Sequelize.STRING, unique: true },
+  value: {
+    type: Sequelize.INTEGER
+  }
+})
+
+export default Overview
