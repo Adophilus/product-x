@@ -5,7 +5,10 @@ dotenv.config()
 
 const db = new Sequelize({
   dialect: 'sqlite',
-  storage: './db.sqlite'
+  storage: './db.sqlite',
+  define: {
+    timestamps: false
+  }
 })
 
 exports.Tables = {

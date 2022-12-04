@@ -4,7 +4,7 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
-      const overview = await Overview.find()
+      const overview = await Overview.findAll()
       return res.status(StatusCodes.OK).send(overview)
     default:
       return res
