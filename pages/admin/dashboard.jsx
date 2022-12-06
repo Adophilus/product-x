@@ -58,9 +58,9 @@ function RecentActivities() {
           <time
             key={recentActivity.id}
             className="text-gray-500"
-            dateTime={formatEpoch(recentActivity.date)}
+            dateTime={formatEpoch(recentActivity.createdAt)}
           >
-            {formatEpoch(recentActivity.date)}
+            {formatEpoch(recentActivity.createdAt)}
           </time>
         ])
   return (
