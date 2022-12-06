@@ -6,9 +6,7 @@ const Schema = require('../schema')
 module.exports = {
   async up(queryInterface, Sequelize) {
     queryInterface.createTable(Tables.overviews, Schema.Overview)
-    queryInterface.createTable(Tables.recentActivities, Schema.RecentActivity, {
-      timestamps: true
-    })
+    queryInterface.createTable(Tables.recentActivities, Schema.RecentActivity)
     queryInterface.createTable(Tables.tracks, Schema.Track)
     queryInterface.createTable(Tables.users, Schema.User)
   },

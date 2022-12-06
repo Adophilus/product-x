@@ -12,10 +12,8 @@ const Schema = {
   status: {
     type: Sequelize.STRING
   },
-  date: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.NOW
-  }
+  updatedAt: { type: Sequelize.DATE },
+  createdAt: { type: Sequelize.DATE }
 }
 
 module.exports = Schema
