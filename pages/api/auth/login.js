@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       if (Date.now() > loginLink.expires)
         return res.status(StatusCodes.BAD_REQUEST).send('Login link expired!')
       const token = jwt.sign(
-        { email: user.email },
+        { user: { email: user.email } },
         config.jwt.secret,
         config.jwt.options
       )

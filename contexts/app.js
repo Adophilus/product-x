@@ -25,7 +25,7 @@ export const Provider = ({ children }) => {
     return {
       data:
         localStorageUser != null
-          ? verifyJwt(parseJwt(JSON.parse(localStorageUser)))
+          ? verifyJwt(parseJwt(localStorageUser)).user
           : null,
       get email() {
         if (!this.data) return null
@@ -41,9 +41,10 @@ export const Provider = ({ children }) => {
         return !!this.data
       },
       login(token) {
+        window.localStorage.setItem('user', token)
         setState((state) => ({
           ...state,
-          user: { ...state.user, data: verifyJwt(parseJwt(token)) }
+          user: { ...state.user, data: verifyJwt(parseJwt(token)).user }
         }))
       },
       logout() {

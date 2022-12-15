@@ -24,7 +24,5 @@ export function parseJwt(token) {
 }
 
 export function verifyJwt(jwt) {
-  console.log(Date.now())
-  console.log(jwt)
-  return jwt
+  return (Date.now() >= jwt.exp * 1000) ? null : jwt
 }
