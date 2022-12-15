@@ -4,14 +4,15 @@ const Schema = require('../schema')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface) {
     queryInterface.createTable(Tables.overviews, Schema.Overview)
     queryInterface.createTable(Tables.recentActivities, Schema.RecentActivity)
     queryInterface.createTable(Tables.tracks, Schema.Track)
     queryInterface.createTable(Tables.users, Schema.User)
+    queryInterface.createTable(Tables.loginLinks, Schema.LoginLink)
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     /**
      * Add reverting commands here.
      *
@@ -22,5 +23,6 @@ module.exports = {
     queryInterface.dropTable(Tables.recentActivities)
     queryInterface.dropTable(Tables.tracks)
     queryInterface.dropTable(Tables.users)
+    queryInterface.dropTable(Tables.loginLinks)
   }
 }

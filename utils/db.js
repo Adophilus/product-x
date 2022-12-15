@@ -15,7 +15,8 @@ exports.Tables = {
   overviews: 'overviews',
   tracks: 'tracks',
   users: 'users',
-  recentActivities: 'recent_activities'
+  recentActivities: 'recent_activities',
+  loginLinks: 'login_links'
 }
 
 exports.db = db
