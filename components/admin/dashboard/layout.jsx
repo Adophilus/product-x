@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import {
   BellIcon,
@@ -19,6 +19,7 @@ import {
   SidebarDesktop
 } from '@/components/admin/dashboard/navigation/sidebar'
 import { classNames } from '@/utils/helpers'
+import { useRouter } from 'next/router'
 
 const navigation = [
   {
@@ -41,6 +42,11 @@ const secondaryNavigation = [
 
 export default function Layout({ children, pageHeader, user, breadcrumbs }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push('/login')
+  }, [])
 
   return (
     <div>

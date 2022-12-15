@@ -15,5 +15,9 @@ export default async function handler(req, res) {
         expiresIn: '7d'
       })
       return res.status(StatusCodes.OK).send({ token })
+    default:
+      return res
+        .status(StatusCodes.METHOD_NOT_ALLOWED)
+        .send(ReasonPhrases.METHOD_NOT_ALLOWED)
   }
 }
