@@ -1,23 +1,39 @@
 import User from '@/models/User'
+import LoginLink from '@/models/LoginLink'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 import jwt from 'jsonwebtoken'
+import absoluteUrl from 'next-absolute-url'
 import config from '@/config'
-import email from '@/services/email'
+import mailer from '@/services/mailer'
 
 export default async function handler(req, res) {
+  let user
+  let loginLink
+
   switch (req.method) {
+    case 'GET':
+      const { key } = req.query
+      loginLink = await LoginLink.findOne({ where: { id: key } })
+      console.log(loginLink.user)
+      return res.status(StatusCodes.OK).send(ReasonPhrases.OK)
     case 'POST':
-      const link = LoginLink.create()
-      email.send({
+      user = await User.findOne({ where: { email: req.body.email } })
+      if (!user) return res.status(StatusCodes.OK).send(ReasonPhrases.OK)
+      const { origin } = absoluteUrl(req)
+      loginLink = await LoginLink.create({ user: user.email })
+      const link = `${origin}/api/auth/login?key=${loginLink.id}`
+
+      mailer.send({
         template: 'login',
         message: {
-          to: req.body.email
+          to: [{ email: user.email }]
         },
-        locals: link
+        locals: { link }
       })
-      break
+
+      return res.status(StatusCodes.OK).send(ReasonPhrases.OK)
     case 'PATCH':
-      const user = await User.findOne({ email: req.body.email })
+      user = await User.findOne({ where: { email: req.body.email } })
       if (!user)
         return res
           .status(StatusCodes.UNAUTHORIZED)

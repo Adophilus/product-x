@@ -17,6 +17,7 @@ specifiers:
   migrate: ^1.8.0
   mongoose: ^6.6.6
   next: 12.3.1
+  next-absolute-url: ^1.2.2
   postcss: ^8.4.19
   pug: ^3.0.2
   react: 18.2.0
@@ -44,6 +45,7 @@ dependencies:
   migrate: 1.8.0
   mongoose: 6.6.6
   next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+  next-absolute-url: 1.2.2
   pug: 3.0.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -3775,6 +3777,10 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
     optional: true
+
+  /next-absolute-url/1.2.2:
+    resolution: {integrity: sha512-Z2+LZXQTthhw2je9u4eq8QWXxXd57a6b54x9exBfQX4Dct6YxaMjcXZWNLHd9AOlCue84EsMpdSGP7wACqUnPg==}
+    dev: false
 
   /next-tick/1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 
 const Schema = {
-  name: {
+  email: {
     type: Sequelize.STRING,
     primaryKey: true,
     validate: { isEmail: true }

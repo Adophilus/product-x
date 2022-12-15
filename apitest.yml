@@ -1,0 +1,11 @@
+environment:
+  vars:
+    host: http://localhost:3000
+requests:
+  - name: "[POST] get login link"
+    url: "{{host}}/api/auth/login"
+    method: post
+    body:
+      email: info@product-x.localhost
+    expect:
+      status: 200

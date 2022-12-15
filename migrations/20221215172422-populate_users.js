@@ -11,15 +11,11 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.bulkInsert(Tables.overviews, [
+    await queryInterface.bulkInsert(Tables.users, [
       {
-        name: 'registeredUsers',
-        value: 0
+        email: 'info@product-x.localhost'
       },
-      {
-        name: 'registeredTracks',
-        value: 0
-      }
+      { email: 'admin@product-x.localhost' }
     ])
   },
 

@@ -1,19 +1,19 @@
-import { useContext, useRef, useState } from 'react'
-import { Context as AppContext } from '@/contexts/app'
+import { useRef, useState } from 'react'
+// import { Context as AppContext } from '@/contexts/app'
 import { classNames } from '@/utils/helpers'
 import { StatusCodes } from 'http-status-codes'
-import { CheckCircleIcon } from '@heroicons/react/solid'
 
 export const route = '/provider/login'
 
 const State = {
+  neutral: null,
   isSubmitting: 0,
   hasSubmitted: 1
 }
 
 export default function LoginView() {
-  const { user } = useContext(AppContext)
-  const [state, setState] = useState(null)
+  // const { user } = useContext(AppContext)
+  const [state, setState] = useState(State.neutral)
 
   const form = {
     email: useRef(),
@@ -28,32 +28,39 @@ export default function LoginView() {
   }
 
   const onSubmit = async (e) => {
-    setState(State.isSubmitting)
     e.preventDefault()
+    setState(State.isSubmitting)
+
     const loginUrl = '/api/auth/login'
 
-    const res = await fetch(loginUrl, {
-      method: 'POST',
-      body: JSON.stringify(form.values)
-    })
-    let json
+    console.log(form.values)
+    try {
+      const res = await fetch(loginUrl, {
+        method: 'POST',
+        body: JSON.stringify(form.values)
+      })
+      let json
 
-    switch (res.status) {
-      case StatusCodes.OK:
-        console.log('Please check your email')
-        break
-      default:
-        json = await res.json()
-        console.log(json)
+      switch (res.status) {
+        case StatusCodes.OK:
+          console.log('Please check your email')
+          break
+        default:
+          json = await res.json()
+          console.log(json)
+      }
+      setState(State.hasSubmitted)
+    } catch (err) {
+      console.log(err)
+      setState(State.neutral)
     }
-    setState(State.hasSubmitted)
   }
 
   return (
     <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="bg-white sm:mx-auto sm:w-full sm:max-w-md">
         {state === State.hasSubmitted ? (
-          <p>Check your email for the login link</p>
+          <p className="text-center">Check your email for the login link</p>
         ) : (
           <>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
