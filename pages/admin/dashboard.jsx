@@ -1,4 +1,4 @@
-import { useRef, useContext } from 'react'
+import { useContext } from 'react'
 import Link from 'next/link'
 import Layout from '@/components/admin/dashboard/layout'
 import { UserIcon, MapIcon, ChartBarIcon } from '@heroicons/react/outline'
@@ -151,18 +151,10 @@ function Cards() {
 }
 
 export default function DashboardView() {
-  const user = useRef({
-    firstName: 'John',
-    lastName: 'Doe',
-    profileImg:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  })
-
   return (
     <Layout
       icon={ChartBarIcon}
       pageHeader={<PageHeaderComponent title={'Dashboard'} />}
-      user={user.current}
       breadcrumbs={breadcrumbs}
     >
       <div className="mt-8">

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState, useEffect, useContext } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import {
   BellIcon,
@@ -20,6 +20,7 @@ import {
 } from '@/components/admin/dashboard/navigation/sidebar'
 import { classNames } from '@/utils/helpers'
 import { useRouter } from 'next/router'
+import { AppContext } from '@/contexts/app'
 
 const navigation = [
   {
@@ -40,11 +41,13 @@ const secondaryNavigation = [
   { name: 'Help', path: '#', icon: QuestionMarkCircleIcon }
 ]
 
-export default function Layout({ children, pageHeader, user, breadcrumbs }) {
+export default function Layout({ children, pageHeader, breadcrumbs }) {
+  const { user } = useContext(AppContext)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
+    if (user == null)
     router.push('/login')
   }, [])
 
@@ -136,7 +139,7 @@ export default function Layout({ children, pageHeader, user, breadcrumbs }) {
                       />
                       <span className="hidden ml-3 text-gray-700 text-sm font-medium lg:block">
                         <span className="sr-only">Open user menu for </span>
-                        {user.firstName} {user.lastName}
+                        {user.email}
                       </span>
                       <ChevronDownIcon
                         className="hidden flex-shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block"
@@ -169,15 +172,16 @@ export default function Layout({ children, pageHeader, user, breadcrumbs }) {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
+                          <Link href="/login">
                           <a
-                            href="#"
+                          onClick={user.logOut}
                             className={classNames(
                               active ? 'bg-gray-100' : '',
                               'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Logout
-                          </a>
+                          </a></Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>
