@@ -1,19 +1,29 @@
-import { useRef, useState } from 'react'
-// import { Context as AppContext } from '@/contexts/app'
+import { useEffect, useRef, useState, useContext } from 'react'
+import { Context as AppContext } from '@/contexts/app'
 import { classNames } from '@/utils/helpers'
 import { StatusCodes } from 'http-status-codes'
+import { useRouter } from 'next/router'
 
 export const route = '/provider/login'
 
 const State = {
   neutral: null,
   isSubmitting: 0,
-  hasSubmitted: 1
+  hasSubmitted: 1,
+  loggingIn: 2,
+  loginError: 3
 }
 
+const loginUrl = '/api/auth/login'
+
 export default function LoginView() {
-  // const { user } = useContext(AppContext)
-  const [state, setState] = useState(State.neutral)
+  const router = useRouter()
+  const errorMessage = useRef()
+  const { key } = router.query
+  const { user } = useContext(AppContext)
+  const [state, setState] = useState(
+    key != null ? State.loggingIn : State.neutral
+  )
 
   const form = {
     email: useRef(),
@@ -31,21 +41,22 @@ export default function LoginView() {
     e.preventDefault()
     setState(State.isSubmitting)
 
-    const loginUrl = '/api/auth/login'
-
-    console.log(form.values)
     try {
       const res = await fetch(loginUrl, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(form.values)
       })
       let json
 
       switch (res.status) {
         case StatusCodes.OK:
-          console.log('Please check your email')
+          // please check your email
           break
         default:
+          // probably an error
           json = await res.json()
           console.log(json)
       }
@@ -56,10 +67,46 @@ export default function LoginView() {
     }
   }
 
+  const loginUserWithKey = async (key) => {
+    try {
+      const res = await fetch(loginUrl, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ key })
+      })
+      switch (res.status) {
+        case StatusCodes.BAD_REQUEST:
+          errorMessage.current = await res.text()
+          setState(State.loginError)
+          break
+        case StatusCodes.OK:
+          const json = await res.json()
+          user.login(json.token)
+          router.push('/admin/dashboard')
+          break
+        default:
+          console.log('unexpected status code')
+          console.log(await res.text())
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    if (key != null) loginUserWithKey(key)
+  }, [key])
+
   return (
     <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="bg-white sm:mx-auto sm:w-full sm:max-w-md">
-        {state === State.hasSubmitted ? (
+        {state === State.loggingIn ? (
+          <h2>Logging in...</h2>
+        ) : state === State.loginError ? (
+          <p>{errorMessage.current}</p>
+        ) : state === State.hasSubmitted ? (
           <p className="text-center">Check your email for the login link</p>
         ) : (
           <>

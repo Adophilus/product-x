@@ -11,17 +11,26 @@ export default async function handler(req, res) {
   let loginLink
 
   switch (req.method) {
-    case 'GET':
-      const { key } = req.query
+    case 'PATCH':
+      const { key } = req.body
       loginLink = await LoginLink.findOne({ where: { id: key } })
-      console.log(loginLink.user)
-      return res.status(StatusCodes.OK).send(ReasonPhrases.OK)
+      if (loginLink == null)
+        return res.status(StatusCodes.BAD_REQUEST).send('Invalid login link!')
+      user = await User.findOne({ where: { email: loginLink.user } })
+      if (Date.now() > loginLink.expires)
+        return res.status(StatusCodes.BAD_REQUEST).send('Login link expired!')
+      const token = jwt.sign(
+        { email: user.email },
+        config.jwt.secret,
+        config.jwt.options
+      )
+      return res.status(StatusCodes.OK).send({ token })
     case 'POST':
       user = await User.findOne({ where: { email: req.body.email } })
-      if (!user) return res.status(StatusCodes.OK).send(ReasonPhrases.OK)
+      if (user == null) return res.status(StatusCodes.OK).send(ReasonPhrases.OK)
       const { origin } = absoluteUrl(req)
       loginLink = await LoginLink.create({ user: user.email })
-      const link = `${origin}/api/auth/login?key=${loginLink.id}`
+      const link = `${origin}/login?key=${loginLink.id}`
 
       mailer.send({
         template: 'login',
@@ -32,16 +41,6 @@ export default async function handler(req, res) {
       })
 
       return res.status(StatusCodes.OK).send(ReasonPhrases.OK)
-    case 'PATCH':
-      user = await User.findOne({ where: { email: req.body.email } })
-      if (!user)
-        return res
-          .status(StatusCodes.UNAUTHORIZED)
-          .send(ReasonPhrases.UNAUTHORIZED)
-      const token = jwt.sign({ email: user.email }, config.secret, {
-        expiresIn: '7d'
-      })
-      return res.status(StatusCodes.OK).send({ token })
     default:
       return res
         .status(StatusCodes.METHOD_NOT_ALLOWED)

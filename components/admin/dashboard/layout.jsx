@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Context as AppContext } from '@/contexts/app'
 import { Fragment, useState, useEffect, useContext } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import {
@@ -20,7 +21,6 @@ import {
 } from '@/components/admin/dashboard/navigation/sidebar'
 import { classNames } from '@/utils/helpers'
 import { useRouter } from 'next/router'
-import { AppContext } from '@/contexts/app'
 
 const navigation = [
   {
@@ -47,9 +47,10 @@ export default function Layout({ children, pageHeader, breadcrumbs }) {
   const router = useRouter()
 
   useEffect(() => {
-    if (user == null)
-    router.push('/login')
+    if (!user.isLoggedIn) router.push('/login')
   }, [])
+
+  console.log(user)
 
   return (
     <div>
@@ -173,15 +174,16 @@ export default function Layout({ children, pageHeader, breadcrumbs }) {
                       <Menu.Item>
                         {({ active }) => (
                           <Link href="/login">
-                          <a
-                          onClick={user.logOut}
-                            className={classNames(
-                              active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
-                            )}
-                          >
-                            Logout
-                          </a></Link>
+                            <a
+                              onClick={user.logOut}
+                              className={classNames(
+                                active ? 'bg-gray-100' : '',
+                                'block px-4 py-2 text-sm text-gray-700'
+                              )}
+                            >
+                              Logout
+                            </a>
+                          </Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>

@@ -15,7 +15,8 @@ const Schema = {
     }
   },
   expires: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE,
+    defaultValue: () => Date.now() + 1800 * 1000
   }
 }
 

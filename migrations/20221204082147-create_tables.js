@@ -22,7 +22,7 @@ module.exports = {
     queryInterface.dropTable(Tables.overviews)
     queryInterface.dropTable(Tables.recentActivities)
     queryInterface.dropTable(Tables.tracks)
-    queryInterface.dropTable(Tables.users)
     queryInterface.dropTable(Tables.loginLinks)
+    queryInterface.dropTable(Tables.users)
   }
 }
