@@ -44,12 +44,10 @@ const initializeState = () => {
   }
 }
 
-export const AppContext = createContext({})
+export const Context = createContext({})
 
-export const AppProvider = ({ children }) => {
+export const Provider = ({ children }) => {
   return (
-    <AppContext.Provider value={initializeState()}>
-      {children}
-    </AppContext.Provider>
+    <Context.Provider value={initializeState()}>{children}</Context.Provider>
   )
 }
