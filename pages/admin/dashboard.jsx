@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
 import Link from 'next/link'
 import Layout from '@/components/admin/dashboard/layout'
 import { UserIcon, MapIcon, ChartBarIcon } from '@heroicons/react/outline'
@@ -7,6 +7,7 @@ import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeade
 import useSWR from 'swr'
 import TableComponent from '@/components/admin/dashboard/elements/table'
 import { formatEpoch } from '@/utils/helpers'
+import { AppContext } from '@/contexts/app'
 
 // the dashboard page
 
@@ -148,6 +149,7 @@ function Cards() {
     </div>
   )
 }
+
 export default function DashboardView() {
   const user = useRef({
     firstName: 'John',
