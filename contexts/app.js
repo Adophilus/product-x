@@ -48,7 +48,11 @@ export const Provider = ({ children }) => {
         }))
       },
       logout() {
-        this.data = null
+        window.localStorage.removeItem('user')
+        setState((state) => ({
+          ...state,
+          user: { ...state.user, data: null }
+        }))
       }
     }
   }

@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import Link from 'next/link'
 import Layout from '@/components/admin/dashboard/layout'
 import { UserIcon, MapIcon, ChartBarIcon } from '@heroicons/react/outline'
@@ -7,7 +6,6 @@ import PageHeaderComponent from '@/components/admin/dashboard/elements/pageHeade
 import useSWR from 'swr'
 import TableComponent from '@/components/admin/dashboard/elements/table'
 import { formatEpoch } from '@/utils/helpers'
-import { AppContext } from '@/contexts/app'
 
 // the dashboard page
 
@@ -112,7 +110,6 @@ function Card({ card }) {
 
 function Cards() {
   const { data, error } = useSWR('/api/overview', fetcher)
-  console.log(data)
   const cards =
     error != null
       ? []

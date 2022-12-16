@@ -24,6 +24,9 @@ export default async function handler(req, res) {
         config.jwt.secret,
         config.jwt.options
       )
+
+      await loginLink.destroy()
+
       return res.status(StatusCodes.OK).send({ token })
     case 'POST':
       user = await User.findOne({ where: { email: req.body.email } })
@@ -34,9 +37,7 @@ export default async function handler(req, res) {
 
       mailer.send({
         template: 'login',
-        message: {
-          to: [{ email: user.email }]
-        },
+        to: user.email,
         locals: { link }
       })
 
