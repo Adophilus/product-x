@@ -1,16 +1,20 @@
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
 export default {
-  sender: 'admin@product-x.localhost',
+  sender: process.env.MAIL_SENDER,
   templates: {
     directory: './emails'
   },
   transport: {
-    host: '127.0.0.1',
-    port: 1025,
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
     ssl: false,
     tls: true,
     auth: {
-      user: 'product-x',
-      pass: 'product-x'
+      user: process.env.MAIL_USER_NAME,
+      pass: process.env.MAIL_USER_PASS
     }
   }
 }
