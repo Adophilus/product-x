@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useContext } from 'react'
-import { Context as AppContext } from '@/contexts/app'
+import { Context as UserContext } from '@/contexts/user'
 import { classNames } from '@/utils/helpers'
 import { StatusCodes } from 'http-status-codes'
 import { useRouter } from 'next/router'
@@ -20,7 +20,7 @@ export default function LoginView() {
   const router = useRouter()
   const errorMessage = useRef()
   const { key } = router.query
-  const { user } = useContext(AppContext)
+  const user = useContext(UserContext)
   const [state, setState] = useState(
     key != null ? State.loggingIn : State.neutral
   )
