@@ -19,7 +19,7 @@ export default function Test() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <section className="landpage">
+        <section className="bg-white">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
