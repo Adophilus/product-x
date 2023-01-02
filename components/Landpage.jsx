@@ -1,61 +1,89 @@
 import React from 'react'
-import {BsSearch} from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react'
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
+import 'swiper/css'
+import 'swiper/css/pagination'
 
-import { Autoplay, Pagination} from "swiper";
+import { Autoplay, Pagination } from 'swiper'
 const Landpage = () => {
   return (
     <>
-    <section className='landpage'>
-      
-      <Swiper
+      <section className="landpage">
+        <Swiper
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
             delay: 4000,
-            disableOnInteraction: false,
+            disableOnInteraction: false
           }}
           pagination={{
-            clickable: true,
+            clickable: true
           }}
           modules={[Autoplay, Pagination]}
           className="mySwiper inner-landpage-section"
-          >
-            <SwiperSlide className='my-swiper-slide'>
-              <Image layout='fill' alt='swiper slide image' src='/wallpaper (1).jpeg' className='swiper-slide-img' priority/>
-            </SwiperSlide>
-            <SwiperSlide className='my-swiper-slide'>
-              <Image layout='fill' alt='swiper slide image' src='/wallpaper (1).jpg' className='swiper-slide-img' priority/>
-            </SwiperSlide>
-            <SwiperSlide className='my-swiper-slide'>
-              <Image layout='fill' alt='swiper slide image' src='/wallpaper (2).jpg' className='swiper-slide-img' priority/>
-            </SwiperSlide>
+        >
+          <SwiperSlide className="my-swiper-slide">
+            <Image
+              layout="fill"
+              alt="swiper slide image"
+              src="/wallpaper (1).jpeg"
+              className="swiper-slide-img"
+              priority
+            />
+          </SwiperSlide>
+          <SwiperSlide className="my-swiper-slide">
+            <Image
+              layout="fill"
+              alt="swiper slide image"
+              src="/wallpaper (1).jpg"
+              className="swiper-slide-img"
+              priority
+            />
+          </SwiperSlide>
+          <SwiperSlide className="my-swiper-slide">
+            <Image
+              layout="fill"
+              alt="swiper slide image"
+              src="/wallpaper (2).jpg"
+              className="swiper-slide-img"
+              priority
+            />
+          </SwiperSlide>
         </Swiper>
         <div className="landpage-text-container">
           <div className="text-container">
-            <h1>experience interactive learning. your gateway to success every lesson counts</h1>
+            <h1>
+              experience interactive learning. your gateway to success every
+              lesson counts
+            </h1>
             <div className="search-container">
-              <input type="search" name="" id="" placeholder='search' className='search-input'/>
-              <span className='search-btn-container'><BsSearch/></span>
+              <input
+                type="search"
+                name=""
+                id=""
+                placeholder="search"
+                className="search-input"
+              />
+              <span className="search-btn-container">
+                <BsSearch />
+              </span>
             </div>
           </div>
         </div>
-    </section>
-    <section className="course-listing">
-      <div className='course-list-card'></div>
-      <div className='course-list-card'></div>
-      <div className='course-list-card'></div>
-      <div className='course-list-card'></div>
-      <div className='course-list-card'></div>
-      <div className='course-list-card'></div>
-    </section>
+      </section>
+      <section className="course-listing">
+        <div className="course-list-card"></div>
+        <div className="course-list-card"></div>
+        <div className="course-list-card"></div>
+        <div className="course-list-card"></div>
+        <div className="course-list-card"></div>
+        <div className="course-list-card"></div>
+      </section>
     </>
   )
 }
