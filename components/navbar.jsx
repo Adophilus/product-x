@@ -38,10 +38,10 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start py-1">
                 <div className="flex flex-shrink-0 items-center">
                   <h2
-                    className="text-2xl"
+                    className="text-3xl"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                   >
                     <Link href="/">
@@ -55,8 +55,10 @@ export default function Navbar() {
                       <Link key={item.name} href={item.path}>
                         <a
                           className={classNames(
-                            item.current ? 'bg-gray-200' : 'hover:bg-gray-200',
-                            'px-3 py-2 rounded-md text-sm font-medium'
+                            item.current
+                              ? 'bg-black text-white'
+                              : 'hover:bg-gray-200',
+                            'px-3 py-2 rounded-md text-xl font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
                         >
