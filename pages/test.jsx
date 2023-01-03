@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { BsSearch } from 'react-icons/bs'
 import Layout from '@/components/layout'
 import Image from 'next/image'
+import { SearchIcon } from '@heroicons/react/solid'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
@@ -51,23 +51,32 @@ export default function Test() {
             ))}
           </Swiper>
           <div className="absolute z-10 top-0 w-full h-full bg-black bg-opacity-70">
-            <div className="flex w-full h-full justify-center items-center">
+            <div className="flex w-full h-full justify-center items-center px-2">
               <div className="flex flex-col justify-center items-center">
-                <h2 className="text-white text-4xl leading-relaxed text-center capitalize w-1/2">
-                  experience interactive learning. your gateway to success every
-                  lesson counts
+                <h2 className="text-white text-3xl sm:text-4xl flex flex-col gap-y-2 text-center capitalize">
+                  <span>Experience Interactive Learning</span>
+                  <span>Your Gateway to Success</span>
+                  <span>Every Lesson Counts</span>
                 </h2>
-                <div className="search-container">
-                  <input
-                    type="search"
-                    name=""
-                    id=""
-                    placeholder="search"
-                    className="search-input"
-                  />
-                  <span className="search-btn-container">
-                    <BsSearch />
-                  </span>
+                <div className="mt-4">
+                  <div className="mt-1 flex rounded-md shadow-sm w-full">
+                    <div className="relative flex items-stretch flex-grow focus-within:z-10">
+                      <input
+                        type="text"
+                        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full text:xl sm:text-2xl rounded-none rounded-l-md pl-4 border-gray-300"
+                        placeholder="Search"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      className="-ml-px relative inline-flex items-center bg-primary-500 space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 hover:bg-primary-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                    >
+                      <SearchIcon
+                        className="h-5 w-10 text-white"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

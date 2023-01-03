@@ -1,6 +1,5 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { MenuIcon, BellIcon, XMarkIcon } from '@heroicons/react/outline'
+import { Disclosure } from '@headlessui/react'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { classNames } from '@/utils/helpers'
 import Link from 'next/link'
 
@@ -20,28 +19,28 @@ const navigation = [
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="bg-white">
+    <Disclosure as="nav" className="bg-white py-1">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   {open ? (
                     <>
                       <span className="sr-only">Open main menu</span>
-                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                      <XIcon className="block h-6 w-6" aria-hidden="true" />
                     </>
                   ) : (
                     <MenuIcon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start py-1">
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <h2
-                    className="text-3xl"
+                    className="text-xl sm:text-2xl"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                   >
                     <Link href="/">
